@@ -1,22 +1,26 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: AI Nutrition Tracker API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: entries
+    description: Food log entries
+  - name: ai
+    description: AI food analysis
+  - name: summary
+    description: Nutrition summaries
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +28,182 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /entries:
+    get:
+      operationId: listEntries
+      tags: [entries]
+      summary: List food log entries
+      parameters:
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: "ISO date string (YYYY-MM-DD), defaults to today"
+      responses:
+        "200":
+          description: List of entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FoodEntry"
+    post:
+      operationId: createEntry
+      tags: [entries]
+      summary: Log a food entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodEntryInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodEntry"
+
+  /entries/{id}:
+    get:
+      operationId: getEntry
+      tags: [entries]
+      summary: Get a food entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Food entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodEntry"
+        "404":
+          description: Not found
+    patch:
+      operationId: updateEntry
+      tags: [entries]
+      summary: Update a food entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodEntryUpdate"
+      responses:
+        "200":
+          description: Updated entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodEntry"
+        "404":
+          description: Not found
+    delete:
+      operationId: deleteEntry
+      tags: [entries]
+      summary: Delete a food entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+
+  /analyze-food:
+    post:
+      operationId: analyzeFood
+      tags: [ai]
+      summary: AI food analysis — returns nutritional info for a described food
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodAnalysisRequest"
+      responses:
+        "200":
+          description: Nutritional analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodAnalysisResult"
+
+  /summary/daily:
+    get:
+      operationId: getDailySummary
+      tags: [summary]
+      summary: Get daily nutrition summary
+      parameters:
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
+            description: "ISO date string (YYYY-MM-DD), defaults to today"
+      responses:
+        "200":
+          description: Daily summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailySummary"
+
+  /summary/weekly:
+    get:
+      operationId: getWeeklySummary
+      tags: [summary]
+      summary: Get weekly calorie data for chart
+      responses:
+        "200":
+          description: Weekly summary
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DayCalories"
+
+  /history:
+    get:
+      operationId: getHistory
+      tags: [summary]
+      summary: Get past days with their summaries
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: History entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailySummary"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +211,131 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    FoodEntry:
+      type: object
+      required: [id, name, calories, protein, carbs, fat, mealType, loggedAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        calories:
+          type: number
+        protein:
+          type: number
+        carbs:
+          type: number
+        fat:
+          type: number
+        servingSize:
+          type: ["string", "null"]
+        mealType:
+          type: string
+          enum: [breakfast, lunch, dinner, snack]
+        loggedAt:
+          type: string
+          description: ISO timestamp
+
+    FoodEntryInput:
+      type: object
+      required: [name, calories, protein, carbs, fat, mealType]
+      properties:
+        name:
+          type: string
+        calories:
+          type: number
+        protein:
+          type: number
+        carbs:
+          type: number
+        fat:
+          type: number
+        servingSize:
+          type: string
+        mealType:
+          type: string
+          enum: [breakfast, lunch, dinner, snack]
+        loggedAt:
+          type: string
+          description: ISO timestamp (optional, defaults to now)
+
+    FoodEntryUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        calories:
+          type: number
+        protein:
+          type: number
+        carbs:
+          type: number
+        fat:
+          type: number
+        servingSize:
+          type: string
+        mealType:
+          type: string
+          enum: [breakfast, lunch, dinner, snack]
+
+    FoodAnalysisRequest:
+      type: object
+      required: [description]
+      properties:
+        description:
+          type: string
+          description: Natural language description of the food (e.g. "a bowl of oatmeal with banana")
+
+    FoodAnalysisResult:
+      type: object
+      required: [name, calories, protein, carbs, fat, servingSize, confidence]
+      properties:
+        name:
+          type: string
+        calories:
+          type: number
+        protein:
+          type: number
+        carbs:
+          type: number
+        fat:
+          type: number
+        servingSize:
+          type: string
+        confidence:
+          type: string
+          enum: [high, medium, low]
+        notes:
+          type: ["string", "null"]
+
+    DailySummary:
+      type: object
+      required: [date, totalCalories, totalProtein, totalCarbs, totalFat, entryCount, calorieGoal]
+      properties:
+        date:
+          type: string
+        totalCalories:
+          type: number
+        totalProtein:
+          type: number
+        totalCarbs:
+          type: number
+        totalFat:
+          type: number
+        entryCount:
+          type: integer
+        calorieGoal:
+          type: integer
+
+    DayCalories:
+      type: object
+      required: [date, calories, label]
+      properties:
+        date:
+          type: string
+        calories:
+          type: number
+        label:
+          type: string
