@@ -130,6 +130,26 @@ export const AnalyzeFoodResponse = zod.object({
 
 
 /**
+ * @summary AI food analysis from an image — returns nutritional info by scanning a photo
+ */
+export const AnalyzeFoodImageBody = zod.object({
+  "imageBase64": zod.string().describe('Base64-encoded image data'),
+  "mimeType": zod.string().describe('MIME type of the image (e.g. image\/jpeg, image\/png, image\/webp)')
+})
+
+export const AnalyzeFoodImageResponse = zod.object({
+  "name": zod.string(),
+  "calories": zod.number(),
+  "protein": zod.number(),
+  "carbs": zod.number(),
+  "fat": zod.number(),
+  "servingSize": zod.string(),
+  "confidence": zod.enum(['high', 'medium', 'low']),
+  "notes": zod.string().nullish()
+})
+
+
+/**
  * @summary Get daily nutrition summary
  */
 export const GetDailySummaryQueryParams = zod.object({

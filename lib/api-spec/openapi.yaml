@@ -148,6 +148,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/FoodAnalysisResult"
 
+  /analyze-food-image:
+    post:
+      operationId: analyzeFoodImage
+      tags: [ai]
+      summary: AI food analysis from an image — returns nutritional info by scanning a photo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FoodImageAnalysisRequest"
+      responses:
+        "200":
+          description: Nutritional analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FoodAnalysisResult"
+
   /summary/daily:
     get:
       operationId: getDailySummary
@@ -287,6 +306,17 @@ components:
         description:
           type: string
           description: Natural language description of the food (e.g. "a bowl of oatmeal with banana")
+
+    FoodImageAnalysisRequest:
+      type: object
+      required: [imageBase64, mimeType]
+      properties:
+        imageBase64:
+          type: string
+          description: Base64-encoded image data
+        mimeType:
+          type: string
+          description: MIME type of the image (e.g. image/jpeg, image/png, image/webp)
 
     FoodAnalysisResult:
       type: object

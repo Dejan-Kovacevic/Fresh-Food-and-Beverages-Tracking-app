@@ -80,6 +80,13 @@ export interface FoodAnalysisRequest {
   description: string;
 }
 
+export interface FoodImageAnalysisRequest {
+  /** Base64-encoded image data */
+  imageBase64: string;
+  /** MIME type of the image (e.g. image/jpeg, image/png, image/webp) */
+  mimeType: string;
+}
+
 export type FoodAnalysisResultConfidence = typeof FoodAnalysisResultConfidence[keyof typeof FoodAnalysisResultConfidence];
 
 

@@ -27,6 +27,7 @@ import type {
   FoodEntry,
   FoodEntryInput,
   FoodEntryUpdate,
+  FoodImageAnalysisRequest,
   GetDailySummaryParams,
   GetHistoryParams,
   HealthStatus,
@@ -565,6 +566,77 @@ export const useAnalyzeFood = <TError = ErrorType<unknown>,
         TContext
       > => {
       return useMutation(getAnalyzeFoodMutationOptions(options));
+    }
+
+export const getAnalyzeFoodImageUrl = () => {
+
+
+
+
+  return `/api/analyze-food-image`
+}
+
+/**
+ * @summary AI food analysis from an image — returns nutritional info by scanning a photo
+ */
+export const analyzeFoodImage = async (foodImageAnalysisRequest: FoodImageAnalysisRequest, options?: RequestInit): Promise<FoodAnalysisResult> => {
+
+  return customFetch<FoodAnalysisResult>(getAnalyzeFoodImageUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      foodImageAnalysisRequest,)
+  }
+);}
+
+
+
+
+export const getAnalyzeFoodImageMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof analyzeFoodImage>>, TError,{data: BodyType<FoodImageAnalysisRequest>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof analyzeFoodImage>>, TError,{data: BodyType<FoodImageAnalysisRequest>}, TContext> => {
+
+const mutationKey = ['analyzeFoodImage'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof analyzeFoodImage>>, {data: BodyType<FoodImageAnalysisRequest>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  analyzeFoodImage(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AnalyzeFoodImageMutationResult = NonNullable<Awaited<ReturnType<typeof analyzeFoodImage>>>
+    export type AnalyzeFoodImageMutationBody = BodyType<FoodImageAnalysisRequest>
+    export type AnalyzeFoodImageMutationError = ErrorType<unknown>
+
+    /**
+ * @summary AI food analysis from an image — returns nutritional info by scanning a photo
+ */
+export const useAnalyzeFoodImage = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof analyzeFoodImage>>, TError,{data: BodyType<FoodImageAnalysisRequest>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof analyzeFoodImage>>,
+        TError,
+        {data: BodyType<FoodImageAnalysisRequest>},
+        TContext
+      > => {
+      return useMutation(getAnalyzeFoodImageMutationOptions(options));
     }
 
 export const getGetDailySummaryUrl = (params?: GetDailySummaryParams,) => {

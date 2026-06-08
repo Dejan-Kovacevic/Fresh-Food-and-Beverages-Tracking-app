@@ -17,6 +17,7 @@ export * from './foodEntryInputMealType';
 export * from './foodEntryMealType';
 export * from './foodEntryUpdate';
 export * from './foodEntryUpdateMealType';
+export * from './foodImageAnalysisRequest';
 export * from './getDailySummaryParams';
 export * from './getHistoryParams';
 export * from './healthStatus';
