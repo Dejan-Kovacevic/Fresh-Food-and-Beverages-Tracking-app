@@ -355,7 +355,7 @@ export function AddFood() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label>Calories</Label>
-                        <Input type="number" {...form.register("calories")} className="font-bold text-primary tabular-nums" data-testid="input-calories" />
+                        <Input type="number" step="any" {...form.register("calories")} className="font-bold text-primary tabular-nums" data-testid="input-calories" />
                       </div>
                       <div className="space-y-2">
                         <Label>Serving Size</Label>
@@ -366,15 +366,15 @@ export function AddFood() {
                     <div className="grid grid-cols-3 gap-4 p-4 bg-muted/30 rounded-xl">
                       <div className="space-y-2">
                         <Label className="text-xs uppercase text-chart-2">Protein (g)</Label>
-                        <Input type="number" {...form.register("protein")} className="tabular-nums" data-testid="input-protein" />
+                        <Input type="number" step="any" {...form.register("protein")} className="tabular-nums" data-testid="input-protein" />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-xs uppercase text-chart-3">Carbs (g)</Label>
-                        <Input type="number" {...form.register("carbs")} className="tabular-nums" data-testid="input-carbs" />
+                        <Input type="number" step="any" {...form.register("carbs")} className="tabular-nums" data-testid="input-carbs" />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-xs uppercase text-chart-4">Fat (g)</Label>
-                        <Input type="number" {...form.register("fat")} className="tabular-nums" data-testid="input-fat" />
+                        <Input type="number" step="any" {...form.register("fat")} className="tabular-nums" data-testid="input-fat" />
                       </div>
                     </div>
 
