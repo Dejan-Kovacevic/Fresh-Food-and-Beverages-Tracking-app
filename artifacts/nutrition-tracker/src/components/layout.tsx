@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 
 interface LayoutProps {
   children: React.ReactNode;
+  hideHeader?: boolean;
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, hideHeader = false }: LayoutProps) {
   const [location] = useLocation();
 
   const navItems = [
@@ -22,14 +23,16 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="flex flex-col min-h-[100dvh] max-w-md mx-auto bg-background shadow-2xl relative">
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="bg-primary text-primary-foreground p-1.5 rounded-lg">
-            <Activity className="w-5 h-5" />
+      {!hideHeader && (
+        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="bg-primary text-primary-foreground p-1.5 rounded-lg">
+              <Activity className="w-5 h-5" />
+            </div>
+            <span className="font-bold tracking-tight text-lg">NutriAI</span>
           </div>
-          <span className="font-bold tracking-tight text-lg">NutriAI</span>
-        </div>
-      </header>
+        </header>
+      )}
 
       <main className="flex-1 overflow-y-auto pb-24 relative">
         {children}

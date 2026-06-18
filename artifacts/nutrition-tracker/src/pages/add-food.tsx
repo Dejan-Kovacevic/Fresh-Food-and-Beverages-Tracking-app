@@ -38,6 +38,16 @@ type EntryFormValues = z.infer<typeof entrySchema>;
 
 type InputMode = "text" | "camera" | "manual";
 
+const VALID_MEAL_TYPES = ["breakfast", "lunch", "dinner", "snack"] as const;
+type MealType = typeof VALID_MEAL_TYPES[number];
+
+function getMealTypeFromUrl(): MealType {
+  const param = new URLSearchParams(window.location.search).get("meal") ?? "";
+  return (VALID_MEAL_TYPES as readonly string[]).includes(param)
+    ? (param as MealType)
+    : "lunch";
+}
+
 export function AddFood() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
@@ -65,7 +75,7 @@ export function AddFood() {
       carbs: 0,
       fat: 0,
       servingSize: "",
-      mealType: "lunch",
+      mealType: getMealTypeFromUrl(),
     },
   });
 
