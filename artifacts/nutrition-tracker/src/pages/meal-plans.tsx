@@ -572,12 +572,14 @@ export function MealPlans() {
                             onClick={() => toggleExpanded(key)}
                             aria-expanded={isExpanded}
                             data-testid={`button-prep-${key}`}
-                            className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors"
+                            className="w-full mt-3 py-2.5 px-3 flex items-center justify-between gap-2 bg-amber-50 hover:bg-amber-100 active:bg-amber-100 border border-amber-200/60 rounded-xl transition-colors"
                           >
-                            <ChefHat className="w-3.5 h-3.5" />
-                            Preparation & chef's note
+                            <span className="flex items-center gap-2 text-xs font-semibold text-amber-800">
+                              <ChefHat className="w-4 h-4 text-amber-600" />
+                              Recipe & chef's note
+                            </span>
                             <ChevronDown
-                              className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                              className={`w-4 h-4 text-amber-600 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
                             />
                           </button>
 
