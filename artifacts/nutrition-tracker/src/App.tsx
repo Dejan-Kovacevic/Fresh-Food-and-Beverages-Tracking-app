@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import { Dashboard } from "@/pages/dashboard";
 import { AddFood } from "@/pages/add-food";
 import { History } from "@/pages/history";
+import { MealPlans } from "@/pages/meal-plans";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Dashboard} />
       <Route path="/add" component={AddFood} />
+      <Route path="/plans" component={MealPlans} />
       <Route path="/history" component={History} />
       <Route component={NotFound} />
     </Switch>

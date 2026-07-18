@@ -3,7 +3,8 @@ import {
   Home, 
   Plus, 
   History,
-  Activity
+  Activity,
+  ClipboardList
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
   const navItems = [
     { href: "/", label: "Today", icon: Home },
     { href: "/add", label: "Add Food", icon: Plus },
+    { href: "/plans", label: "Plans", icon: ClipboardList },
     { href: "/history", label: "History", icon: History },
   ];
 

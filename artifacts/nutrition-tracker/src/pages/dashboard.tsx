@@ -302,7 +302,7 @@ export function Dashboard() {
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-7 w-7 text-slate-300 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                              className="h-7 w-7 text-slate-300 hover:text-red-400 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
                               onClick={() => handleDelete(entry.id)}
                               disabled={deleteEntry.isPending}
                               data-testid={`button-delete-${entry.id}`}
