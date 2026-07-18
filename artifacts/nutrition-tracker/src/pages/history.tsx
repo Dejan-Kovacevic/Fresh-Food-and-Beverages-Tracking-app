@@ -2,6 +2,7 @@ import { useGetHistory, getGetHistoryQueryKey, useGetWeeklySummary, getGetWeekly
 import { Layout } from "@/components/layout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format, parseISO } from "date-fns";
+import { de } from "date-fns/locale";
 import { CalendarDays, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
@@ -20,15 +21,15 @@ export function History() {
     <Layout>
       <div className="p-4 space-y-6">
         <header>
-          <h1 className="text-2xl font-bold tracking-tight">History</h1>
-          <p className="text-muted-foreground">Your past days & trends</p>
+          <h1 className="text-2xl font-bold tracking-tight">Verlauf</h1>
+          <p className="text-muted-foreground">Deine vergangenen Tage & Trends</p>
         </header>
 
         {/* Weekly Chart */}
         <section className="bg-card border rounded-3xl p-5 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="w-5 h-5 text-primary" />
-            <h2 className="font-bold">This Week</h2>
+            <h2 className="font-bold">Diese Woche</h2>
           </div>
           
           <div className="h-48 w-full">
@@ -74,14 +75,14 @@ export function History() {
               </ResponsiveContainer>
             ) : (
               <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
-                No data for this week
+                Noch keine Daten diese Woche
               </div>
             )}
           </div>
         </section>
 
         <section className="space-y-4">
-          <h2 className="font-bold text-lg">Past Logs</h2>
+          <h2 className="font-bold text-lg">Vergangene Tage</h2>
           {isLoadingHistory ? (
             <div className="space-y-4">
               {[1, 2, 3].map(i => (
@@ -91,8 +92,8 @@ export function History() {
           ) : history?.length === 0 ? (
             <div className="text-center p-8 bg-muted/30 rounded-3xl border border-dashed">
               <CalendarDays className="w-10 h-10 text-muted-foreground mx-auto mb-4" />
-              <h3 className="font-semibold">No history yet</h3>
-              <p className="text-sm text-muted-foreground">Start logging food to build your streak.</p>
+              <h3 className="font-semibold">Noch kein Verlauf</h3>
+              <p className="text-sm text-muted-foreground">Logge dein Essen, um deinen Verlauf aufzubauen.</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -110,7 +111,7 @@ export function History() {
                   >
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="font-bold text-foreground">
-                        {format(parseISO(day.date), 'EEEE, MMM d')}
+                        {format(parseISO(day.date), 'EEEE, d. MMM', { locale: de })}
                       </h3>
                       <div className="flex items-center gap-1 text-sm font-semibold">
                         <span className={isOver ? "text-destructive" : "text-primary"}>
@@ -134,11 +135,11 @@ export function History() {
                         <div className="font-semibold text-sm tabular-nums text-chart-2">{day.totalProtein}g</div>
                       </div>
                       <div className="bg-muted/50 rounded-lg p-2 text-center">
-                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">Carbs</div>
+                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">Kohlenh.</div>
                         <div className="font-semibold text-sm tabular-nums text-chart-3">{day.totalCarbs}g</div>
                       </div>
                       <div className="bg-muted/50 rounded-lg p-2 text-center">
-                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">Fat</div>
+                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">Fett</div>
                         <div className="font-semibold text-sm tabular-nums text-chart-4">{day.totalFat}g</div>
                       </div>
                     </div>

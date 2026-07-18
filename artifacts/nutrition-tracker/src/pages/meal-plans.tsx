@@ -44,112 +44,112 @@ interface Plan {
 }
 
 const MEAL_META: Record<MealType, { icon: React.ReactNode; label: string }> = {
-  breakfast: { icon: <Coffee className="w-4 h-4 text-amber-500" />, label: "Breakfast" },
-  lunch:     { icon: <Sun    className="w-4 h-4 text-orange-500" />, label: "Lunch" },
+  breakfast: { icon: <Coffee className="w-4 h-4 text-amber-500" />, label: "Frühstück" },
+  lunch:     { icon: <Sun    className="w-4 h-4 text-orange-500" />, label: "Mittagessen" },
   snack:     { icon: <Apple  className="w-4 h-4 text-green-500"  />, label: "Snack" },
-  dinner:    { icon: <Moon   className="w-4 h-4 text-indigo-400" />, label: "Dinner" },
+  dinner:    { icon: <Moon   className="w-4 h-4 text-indigo-400" />, label: "Abendessen" },
 };
 
 const PLANS: Plan[] = [
   {
     id: "cut",
-    name: "Definition Phase",
+    name: "Definitionsphase",
     shortName: "Definition",
-    tagline: "High protein, calorie deficit — preserve muscle while losing fat",
+    tagline: "Viel Protein, Kaloriendefizit — Muskeln erhalten, Fett verlieren",
     gradient: "from-emerald-950 via-slate-900 to-slate-800",
     slots: [
       {
         options: [
           {
-            mealType: "breakfast", title: "Protein Oatmeal with Berries", foods: "250g low-fat quark, 40g oats, 100g blueberries, cinnamon", servingSize: "1 bowl", calories: 380, protein: 38, carbs: 45, fat: 5,
-            prep: ["Soak the oats in a splash of hot water or milk for 2–3 minutes.", "Stir the quark in until creamy — add a little milk if too thick.", "Top with blueberries and a dusting of cinnamon."],
-            note: "Let cold quark sit 5 minutes at room temperature before stirring — it turns noticeably creamier.",
+            mealType: "breakfast", title: "Protein-Oatmeal mit Beeren", foods: "250g Magerquark, 40g Haferflocken, 100g Blaubeeren, Zimt", servingSize: "1 Schüssel", calories: 380, protein: 38, carbs: 45, fat: 5,
+            prep: ["Haferflocken mit etwas heißem Wasser oder Milch 2–3 Minuten quellen lassen.", "Quark cremig unterrühren — bei Bedarf einen Schluck Milch dazugeben.", "Mit Blaubeeren und einer Prise Zimt toppen."],
+            note: "Kalten Quark 5 Minuten bei Raumtemperatur stehen lassen — er wird deutlich cremiger.",
           },
           {
-            mealType: "breakfast", title: "Egg White Omelette with Toast", foods: "4 egg whites + 1 egg, 1 slice whole grain toast, tomatoes, spinach", servingSize: "1 plate", calories: 360, protein: 35, carbs: 35, fat: 8,
-            prep: ["Whisk egg whites with the whole egg, salt and pepper.", "Cook in a non-stick pan over medium-low heat until just set.", "Fold in spinach and tomatoes, serve on the toasted bread."],
-            note: "Low heat is everything — egg whites turn rubbery the moment you rush them.",
+            mealType: "breakfast", title: "Eiweiß-Omelette mit Toast", foods: "4 Eiweiß + 1 Ei, 1 Scheibe Vollkorntoast, Tomaten, Spinat", servingSize: "1 Teller", calories: 360, protein: 35, carbs: 35, fat: 8,
+            prep: ["Eiweiß mit dem ganzen Ei, Salz und Pfeffer verquirlen.", "In einer beschichteten Pfanne bei mittlerer bis niedriger Hitze stocken lassen.", "Spinat und Tomaten einklappen, auf dem getoasteten Brot servieren."],
+            note: "Niedrige Hitze ist alles — Eiweiß wird gummiartig, sobald man es hetzt.",
           },
           {
-            mealType: "breakfast", title: "Skyr Bowl with Banana & Chia", foods: "250g skyr, ½ banana, 10g chia seeds, dash of honey", servingSize: "1 bowl", calories: 360, protein: 30, carbs: 40, fat: 8,
-            prep: ["Stir the skyr smooth and spread into a bowl.", "Slice the banana and arrange on top.", "Sprinkle chia seeds and finish with a drizzle of honey."],
-            note: "Give the chia seeds 10 minutes to soften — they develop a pleasant pudding-like bite.",
-          },
-        ],
-      },
-      {
-        options: [
-          {
-            mealType: "lunch", title: "Grilled Chicken with Rice & Broccoli", foods: "150g chicken breast, 60g basmati rice (dry), 200g broccoli", servingSize: "1 plate", calories: 450, protein: 48, carbs: 48, fat: 6,
-            prep: ["Season the chicken with salt, pepper and paprika; grill or pan-sear 5–6 minutes per side.", "Cook the rice according to package instructions.", "Steam the broccoli 4–5 minutes until bright green.", "Rest the chicken 3 minutes before slicing."],
-            note: "Resting is non-negotiable — slice immediately and the juices end up on the board, not in the meat.",
-          },
-          {
-            mealType: "lunch", title: "Turkey Steak with Potatoes & Beans", foods: "150g turkey breast, 300g potatoes, 150g green beans", servingSize: "1 plate", calories: 440, protein: 45, carbs: 50, fat: 6,
-            prep: ["Boil the potatoes in salted water for 15–20 minutes.", "Sear the turkey steak 4–5 minutes per side over medium-high heat.", "Blanch the green beans 4 minutes and toss with a touch of butter."],
-            note: "Turkey dries out fast — pull it off the heat at 72°C core temperature, not a minute later.",
-          },
-          {
-            mealType: "lunch", title: "Tuna Salad with Chickpeas", foods: "1 can tuna in water, 120g chickpeas, mixed greens, 1 tsp olive oil", servingSize: "1 large bowl", calories: 430, protein: 42, carbs: 35, fat: 12,
-            prep: ["Drain the tuna and chickpeas.", "Toss with greens, cucumber and red onion.", "Dress with olive oil, lemon juice, salt and pepper."],
-            note: "A spoonful of the chickpea brine (aquafaba) emulsifies the dressing beautifully.",
+            mealType: "breakfast", title: "Skyr-Bowl mit Banane & Chia", foods: "250g Skyr, ½ Banane, 10g Chiasamen, etwas Honig", servingSize: "1 Schüssel", calories: 360, protein: 30, carbs: 40, fat: 8,
+            prep: ["Skyr glatt rühren und in eine Schüssel geben.", "Banane in Scheiben schneiden und darauf verteilen.", "Chiasamen darüberstreuen und mit etwas Honig abrunden."],
+            note: "Chiasamen 10 Minuten ziehen lassen — sie bekommen einen angenehmen Pudding-Biss.",
           },
         ],
       },
       {
         options: [
           {
-            mealType: "snack", title: "Skyr with Almonds", foods: "150g skyr, 10g almonds", servingSize: "1 cup", calories: 200, protein: 22, carbs: 10, fat: 8,
-            prep: ["Spoon the skyr into a cup.", "Roughly chop the almonds and scatter on top."],
-            note: "Toast the almonds 2 minutes in a dry pan — the flavor gets dramatically deeper.",
+            mealType: "lunch", title: "Gegrilltes Hähnchen mit Reis & Brokkoli", foods: "150g Hähnchenbrust, 60g Basmatireis (roh), 200g Brokkoli", servingSize: "1 Teller", calories: 450, protein: 48, carbs: 48, fat: 6,
+            prep: ["Hähnchen mit Salz, Pfeffer und Paprika würzen; 5–6 Minuten pro Seite grillen oder braten.", "Reis nach Packungsanleitung kochen.", "Brokkoli 4–5 Minuten dämpfen, bis er leuchtend grün ist.", "Hähnchen vor dem Aufschneiden 3 Minuten ruhen lassen."],
+            note: "Das Ruhen ist Pflicht — schneidest du sofort, landet der Saft auf dem Brett statt im Fleisch.",
           },
           {
-            mealType: "snack", title: "Protein Shake with Apple", foods: "30g whey protein in water, 1 apple", servingSize: "1 shake + fruit", calories: 210, protein: 25, carbs: 25, fat: 2,
-            prep: ["Shake the whey with 300ml cold water until smooth.", "Enjoy with the apple on the side."],
-            note: "Ice-cold water makes a whey shake noticeably creamier than lukewarm.",
+            mealType: "lunch", title: "Putensteak mit Kartoffeln & Bohnen", foods: "150g Putenbrust, 300g Kartoffeln, 150g grüne Bohnen", servingSize: "1 Teller", calories: 440, protein: 45, carbs: 50, fat: 6,
+            prep: ["Kartoffeln in Salzwasser 15–20 Minuten kochen.", "Putensteak bei mittelhoher Hitze 4–5 Minuten pro Seite braten.", "Grüne Bohnen 4 Minuten blanchieren und mit etwas Butter schwenken."],
+            note: "Pute trocknet schnell aus — bei 72°C Kerntemperatur aus der Pfanne, keine Minute später.",
           },
           {
-            mealType: "snack", title: "Cottage Cheese with Cucumber", foods: "200g cottage cheese, ½ cucumber, pepper", servingSize: "1 bowl", calories: 180, protein: 24, carbs: 8, fat: 5,
-            prep: ["Slice the cucumber.", "Season the cottage cheese with pepper and fresh herbs, serve together."],
-            note: "Fresh dill or chives lift this from plain to genuinely delicious.",
-          },
-        ],
-      },
-      {
-        options: [
-          {
-            mealType: "dinner", title: "Baked Salmon with Quinoa & Asparagus", foods: "150g salmon fillet, 50g quinoa (dry), 200g green asparagus", servingSize: "1 plate", calories: 520, protein: 40, carbs: 40, fat: 20,
-            prep: ["Rinse the quinoa, then simmer 15 minutes in double its volume of water.", "Season the salmon and bake 12–14 minutes at 200°C.", "Roast the asparagus alongside with olive oil, salt and lemon."],
-            note: "Salmon is done when it flakes but still looks glossy in the center — matte means overcooked.",
-          },
-          {
-            mealType: "dinner", title: "Lean Beef with Zucchini & Rice", foods: "150g lean beef strips, 50g rice (dry), zucchini, soy sauce", servingSize: "1 plate", calories: 500, protein: 45, carbs: 45, fat: 15,
-            prep: ["Cook the rice.", "Sear the beef strips hot and fast, 1–2 minutes, then set aside.", "Stir-fry the zucchini, deglaze with soy sauce and return the beef."],
-            note: "Sear in batches — a crowded pan steams the meat gray instead of browning it.",
-          },
-          {
-            mealType: "dinner", title: "Shrimp Stir-Fry with Basmati Rice", foods: "200g shrimp, 60g basmati rice (dry), wok vegetables, 1 tsp oil", servingSize: "1 plate", calories: 480, protein: 42, carbs: 55, fat: 9,
-            prep: ["Cook the basmati rice.", "Stir-fry the vegetables 3–4 minutes in a very hot wok.", "Add the shrimp for the final 2–3 minutes until pink."],
-            note: "Shrimp are done the moment they curl into a loose C — a tight O means overcooked.",
+            mealType: "lunch", title: "Thunfischsalat mit Kichererbsen", foods: "1 Dose Thunfisch im eigenen Saft, 120g Kichererbsen, Blattsalat, 1 TL Olivenöl", servingSize: "1 große Schüssel", calories: 430, protein: 42, carbs: 35, fat: 12,
+            prep: ["Thunfisch und Kichererbsen abtropfen lassen.", "Mit Salat, Gurke und roten Zwiebeln vermengen.", "Mit Olivenöl, Zitronensaft, Salz und Pfeffer anmachen."],
+            note: "Ein Löffel Kichererbsenwasser (Aquafaba) bindet das Dressing wunderbar.",
           },
         ],
       },
       {
         options: [
           {
-            mealType: "snack", title: "Cottage Cheese Before Bed", foods: "200g cottage cheese (slow-release casein protein)", servingSize: "1 bowl", calories: 180, protein: 28, carbs: 7, fat: 4,
-            prep: ["Spoon into a bowl and season — sweet with cinnamon or savory with pepper."],
-            note: "Casein digests over 6–7 hours and feeds your muscles while you sleep.",
+            mealType: "snack", title: "Skyr mit Mandeln", foods: "150g Skyr, 10g Mandeln", servingSize: "1 Becher", calories: 200, protein: 22, carbs: 10, fat: 8,
+            prep: ["Skyr in einen Becher geben.", "Mandeln grob hacken und darüberstreuen."],
+            note: "Mandeln 2 Minuten in der trockenen Pfanne rösten — der Geschmack wird deutlich intensiver.",
           },
           {
-            mealType: "snack", title: "Casein Shake", foods: "30g casein protein in water", servingSize: "1 shake", calories: 120, protein: 25, carbs: 3, fat: 1,
-            prep: ["Mix the casein with 300ml water and shake vigorously."],
-            note: "Casein thickens on standing — use more water than you would for whey.",
+            mealType: "snack", title: "Proteinshake mit Apfel", foods: "30g Whey-Protein in Wasser, 1 Apfel", servingSize: "1 Shake + Obst", calories: 210, protein: 25, carbs: 25, fat: 2,
+            prep: ["Whey mit 300ml kaltem Wasser schütteln, bis alles gelöst ist.", "Den Apfel dazu genießen."],
+            note: "Eiskaltes Wasser macht den Shake spürbar cremiger als lauwarmes.",
           },
           {
-            mealType: "snack", title: "Harzer Cheese with Pickles", foods: "100g Harzer cheese, gherkins", servingSize: "1 portion", calories: 130, protein: 27, carbs: 1, fat: 1,
-            prep: ["Slice the cheese and serve with the gherkins."],
-            note: "27g protein at almost zero fat — the most underrated cutting food in any German supermarket.",
+            mealType: "snack", title: "Hüttenkäse mit Gurke", foods: "200g Hüttenkäse, ½ Gurke, Pfeffer", servingSize: "1 Schüssel", calories: 180, protein: 24, carbs: 8, fat: 5,
+            prep: ["Gurke in Scheiben schneiden.", "Hüttenkäse mit Pfeffer und frischen Kräutern würzen, zusammen servieren."],
+            note: "Frischer Dill oder Schnittlauch macht aus dem simplen Snack etwas richtig Gutes.",
+          },
+        ],
+      },
+      {
+        options: [
+          {
+            mealType: "dinner", title: "Ofenlachs mit Quinoa & Spargel", foods: "150g Lachsfilet, 50g Quinoa (roh), 200g grüner Spargel", servingSize: "1 Teller", calories: 520, protein: 40, carbs: 40, fat: 20,
+            prep: ["Quinoa abspülen, dann 15 Minuten in der doppelten Menge Wasser köcheln.", "Lachs würzen und 12–14 Minuten bei 200°C backen.", "Spargel mit Olivenöl, Salz und Zitrone daneben rösten."],
+            note: "Lachs ist fertig, wenn er blättert, aber innen noch glänzt — matt heißt verkocht.",
+          },
+          {
+            mealType: "dinner", title: "Mageres Rind mit Zucchini & Reis", foods: "150g magere Rinderstreifen, 50g Reis (roh), Zucchini, Sojasauce", servingSize: "1 Teller", calories: 500, protein: 45, carbs: 45, fat: 15,
+            prep: ["Reis kochen.", "Rinderstreifen heiß und kurz anbraten, 1–2 Minuten, dann beiseitelegen.", "Zucchini anbraten, mit Sojasauce ablöschen und das Fleisch zurückgeben."],
+            note: "In Portionen anbraten — eine überfüllte Pfanne dämpft das Fleisch grau, statt es zu bräunen.",
+          },
+          {
+            mealType: "dinner", title: "Garnelen-Pfanne mit Basmatireis", foods: "200g Garnelen, 60g Basmatireis (roh), Wok-Gemüse, 1 TL Öl", servingSize: "1 Teller", calories: 480, protein: 42, carbs: 55, fat: 9,
+            prep: ["Basmatireis kochen.", "Gemüse 3–4 Minuten im sehr heißen Wok anbraten.", "Garnelen die letzten 2–3 Minuten mitbraten, bis sie rosa sind."],
+            note: "Garnelen sind fertig, sobald sie sich zu einem lockeren C krümmen — ein enges O heißt verkocht.",
+          },
+        ],
+      },
+      {
+        options: [
+          {
+            mealType: "snack", title: "Hüttenkäse vor dem Schlafen", foods: "200g Hüttenkäse (langsames Casein-Protein)", servingSize: "1 Schüssel", calories: 180, protein: 28, carbs: 7, fat: 4,
+            prep: ["In eine Schüssel geben und würzen — süß mit Zimt oder herzhaft mit Pfeffer."],
+            note: "Casein wird über 6–7 Stunden verdaut und versorgt deine Muskeln im Schlaf.",
+          },
+          {
+            mealType: "snack", title: "Casein-Shake", foods: "30g Casein-Protein in Wasser", servingSize: "1 Shake", calories: 120, protein: 25, carbs: 3, fat: 1,
+            prep: ["Casein mit 300ml Wasser mischen und kräftig schütteln."],
+            note: "Casein dickt beim Stehen nach — nimm mehr Wasser als bei Whey.",
+          },
+          {
+            mealType: "snack", title: "Harzer Käse mit Gewürzgurken", foods: "100g Harzer Käse, Gewürzgurken", servingSize: "1 Portion", calories: 130, protein: 27, carbs: 1, fat: 1,
+            prep: ["Käse in Scheiben schneiden und mit den Gurken servieren."],
+            note: "27g Protein bei fast null Fett — das am meisten unterschätzte Diät-Lebensmittel im Supermarkt.",
           },
         ],
       },
@@ -157,103 +157,103 @@ const PLANS: Plan[] = [
   },
   {
     id: "bulk",
-    name: "Muscle Building",
-    shortName: "Muscle Gain",
-    tagline: "Calorie surplus with quality carbs & protein for maximum growth",
+    name: "Muskelaufbau",
+    shortName: "Muskelaufbau",
+    tagline: "Kalorienüberschuss mit guten Carbs & Protein für maximales Wachstum",
     gradient: "from-indigo-950 via-slate-900 to-slate-800",
     slots: [
       {
         options: [
           {
-            mealType: "breakfast", title: "Scrambled Eggs on Whole Grain Toast", foods: "3 eggs, 2 slices whole grain toast, ½ avocado", servingSize: "1 plate", calories: 550, protein: 32, carbs: 45, fat: 26,
-            prep: ["Whisk the eggs with a pinch of salt.", "Scramble over low heat, stirring slowly, until softly set.", "Serve on the toast with sliced avocado."],
-            note: "Pull the pan off the heat just before the eggs look done — they finish cooking on the plate.",
+            mealType: "breakfast", title: "Rührei auf Vollkorntoast", foods: "3 Eier, 2 Scheiben Vollkorntoast, ½ Avocado", servingSize: "1 Teller", calories: 550, protein: 32, carbs: 45, fat: 26,
+            prep: ["Eier mit einer Prise Salz verquirlen.", "Bei niedriger Hitze langsam rührend stocken lassen, bis sie gerade fest sind.", "Auf dem Toast mit Avocadoscheiben servieren."],
+            note: "Nimm die Pfanne vom Herd, kurz bevor das Rührei fertig aussieht — es gart auf dem Teller nach.",
           },
           {
-            mealType: "breakfast", title: "Protein Pancakes with Banana", foods: "50g oats, 30g whey, 2 eggs, 1 banana, maple syrup", servingSize: "3 pancakes", calories: 560, protein: 38, carbs: 70, fat: 12,
-            prep: ["Blend oats, whey, eggs and banana into a smooth batter.", "Cook small pancakes 2–3 minutes per side over medium heat.", "Stack and top with maple syrup."],
-            note: "Rest the batter 5 minutes so the oats bind — the pancakes flip much cleaner.",
+            mealType: "breakfast", title: "Protein-Pancakes mit Banane", foods: "50g Haferflocken, 30g Whey, 2 Eier, 1 Banane, Ahornsirup", servingSize: "3 Pancakes", calories: 560, protein: 38, carbs: 70, fat: 12,
+            prep: ["Haferflocken, Whey, Eier und Banane zu einem glatten Teig mixen.", "Kleine Pancakes bei mittlerer Hitze 2–3 Minuten pro Seite backen.", "Stapeln und mit Ahornsirup toppen."],
+            note: "Teig 5 Minuten ruhen lassen, damit die Haferflocken binden — die Pancakes lassen sich viel sauberer wenden.",
           },
           {
-            mealType: "breakfast", title: "Breakfast Burrito", foods: "1 large tortilla, 2 eggs, cheese, black beans, salsa", servingSize: "1 burrito", calories: 570, protein: 30, carbs: 55, fat: 24,
-            prep: ["Scramble the eggs and warm the beans.", "Layer eggs, cheese, beans and salsa on the tortilla.", "Roll tightly and toast seam-side down in the pan."],
-            note: "Toasting the seam seals the burrito shut and adds a satisfying crunch.",
-          },
-        ],
-      },
-      {
-        options: [
-          {
-            mealType: "snack", title: "Mass Gainer Shake", foods: "1 banana, 50g oats, 30g whey protein, 15g peanut butter, 300ml milk", servingSize: "1 shake", calories: 520, protein: 35, carbs: 60, fat: 15,
-            prep: ["Blend all ingredients for 30–45 seconds until completely smooth."],
-            note: "Use a frozen banana instead of ice — milkshake thickness without watering it down.",
-          },
-          {
-            mealType: "snack", title: "PB&J Sandwich with Milk", foods: "2 slices bread, 20g peanut butter, jam, 300ml milk", servingSize: "1 sandwich + glass", calories: 540, protein: 22, carbs: 65, fat: 20,
-            prep: ["Spread peanut butter on one slice, jam on the other.", "Close, slice diagonally, enjoy with the glass of milk."],
-            note: "Spread peanut butter on both slices as a moisture barrier — no more soggy bread.",
-          },
-          {
-            mealType: "snack", title: "Trail Mix with Greek Yogurt", foods: "40g nut & raisin mix, 200g Greek yogurt", servingSize: "1 bowl", calories: 500, protein: 22, carbs: 45, fat: 25,
-            prep: ["Stir the trail mix into the yogurt, or eat them side by side."],
-            note: "Buy nuts unsalted — you control the sodium and the natural flavor comes through.",
+            mealType: "breakfast", title: "Frühstücks-Burrito", foods: "1 große Tortilla, 2 Eier, Käse, schwarze Bohnen, Salsa", servingSize: "1 Burrito", calories: 570, protein: 30, carbs: 55, fat: 24,
+            prep: ["Eier verrühren und braten; Bohnen erwärmen.", "Eier, Käse, Bohnen und Salsa auf die Tortilla schichten.", "Fest einrollen und mit der Naht nach unten in der Pfanne anrösten."],
+            note: "Das Anrösten der Naht verschließt den Burrito und sorgt für extra Crunch.",
           },
         ],
       },
       {
         options: [
           {
-            mealType: "lunch", title: "Beef Strips with Pasta", foods: "150g lean beef, 100g pasta (dry), tomato sauce, parmesan", servingSize: "1 plate", calories: 650, protein: 45, carbs: 75, fat: 18,
-            prep: ["Cook the pasta al dente in well-salted water.", "Sear the beef strips over high heat for 1–2 minutes.", "Simmer briefly with the tomato sauce, toss with the pasta, finish with parmesan."],
-            note: "Save a cup of pasta water — one splash turns any sauce silky and helps it cling.",
+            mealType: "snack", title: "Mass-Gainer-Shake", foods: "1 Banane, 50g Haferflocken, 30g Whey-Protein, 15g Erdnussbutter, 300ml Milch", servingSize: "1 Shake", calories: 520, protein: 35, carbs: 60, fat: 15,
+            prep: ["Alle Zutaten 30–45 Sekunden mixen, bis alles komplett glatt ist."],
+            note: "Gefrorene Banane statt Eiswürfel — Milchshake-Konsistenz ohne Verwässern.",
           },
           {
-            mealType: "lunch", title: "Chicken Burrito Bowl", foods: "150g chicken, 80g rice (dry), black beans, corn, salsa", servingSize: "1 bowl", calories: 660, protein: 48, carbs: 80, fat: 14,
-            prep: ["Cook the rice; season the chicken with cumin and paprika, then sear.", "Warm the beans and corn.", "Assemble the bowl and top with salsa."],
-            note: "15 minutes in lime juice tenderizes the chicken and brightens the whole bowl.",
+            mealType: "snack", title: "Erdnussbutter-Marmeladen-Sandwich mit Milch", foods: "2 Scheiben Brot, 20g Erdnussbutter, Marmelade, 300ml Milch", servingSize: "1 Sandwich + Glas", calories: 540, protein: 22, carbs: 65, fat: 20,
+            prep: ["Erdnussbutter auf die eine Scheibe, Marmelade auf die andere streichen.", "Zusammenklappen, diagonal schneiden, mit dem Glas Milch genießen."],
+            note: "Erdnussbutter auf beide Scheiben streichen wirkt als Feuchtigkeitssperre — nie wieder matschiges Brot.",
           },
           {
-            mealType: "lunch", title: "Salmon with Sweet Potato Mash", foods: "180g salmon, 300g sweet potato, 10g butter, greens", servingSize: "1 plate", calories: 640, protein: 40, carbs: 60, fat: 24,
-            prep: ["Boil the sweet potato 15 minutes, then mash with butter.", "Pan-sear the salmon 3–4 minutes skin-side down, then 2 more minutes.", "Serve with the greens."],
-            note: "Start skin-side down and don't touch it — that patience is the whole secret to crisp skin.",
-          },
-        ],
-      },
-      {
-        options: [
-          {
-            mealType: "snack", title: "Greek Yogurt with Granola & Honey", foods: "200g Greek yogurt, 40g granola, 1 tsp honey", servingSize: "1 bowl", calories: 380, protein: 20, carbs: 50, fat: 10,
-            prep: ["Layer yogurt, granola and honey in a bowl."],
-            note: "Add the granola right before eating so it stays crunchy instead of soaking soft.",
-          },
-          {
-            mealType: "snack", title: "Rice Cakes with Peanut Butter", foods: "4 rice cakes, 20g peanut butter, 1 banana", servingSize: "1 portion", calories: 370, protein: 12, carbs: 50, fat: 14,
-            prep: ["Spread peanut butter on the rice cakes and top with banana slices."],
-            note: "A tiny pinch of sea salt on the banana makes the sweetness pop.",
-          },
-          {
-            mealType: "snack", title: "Cheese Sandwich", foods: "2 slices whole grain bread, 2 slices gouda, butter", servingSize: "1 sandwich", calories: 390, protein: 18, carbs: 40, fat: 16,
-            prep: ["Butter the bread, layer the gouda, done."],
-            note: "Aged gouda carries far more flavor per gram — you need less of it.",
+            mealType: "snack", title: "Studentenfutter mit griechischem Joghurt", foods: "40g Nuss-Rosinen-Mix, 200g griechischer Joghurt", servingSize: "1 Schüssel", calories: 500, protein: 22, carbs: 45, fat: 25,
+            prep: ["Studentenfutter in den Joghurt rühren oder getrennt genießen."],
+            note: "Nüsse ungesalzen kaufen — du kontrollierst das Salz und der natürliche Geschmack kommt durch.",
           },
         ],
       },
       {
         options: [
           {
-            mealType: "dinner", title: "Chicken Thighs with Rice & Vegetables", foods: "180g chicken thigh, 80g jasmine rice (dry), mixed vegetables", servingSize: "1 plate", calories: 620, protein: 45, carbs: 70, fat: 16,
-            prep: ["Season the thighs and roast 25 minutes at 200°C, skin-side up.", "Cook the rice and steam or stir-fry the vegetables.", "Rest the chicken 5 minutes before serving."],
-            note: "Thighs are forgiving — a few extra minutes make them more tender, not drier.",
+            mealType: "lunch", title: "Rinderstreifen mit Pasta", foods: "150g mageres Rind, 100g Pasta (roh), Tomatensauce, Parmesan", servingSize: "1 Teller", calories: 650, protein: 45, carbs: 75, fat: 18,
+            prep: ["Pasta in gut gesalzenem Wasser al dente kochen.", "Rinderstreifen bei hoher Hitze 1–2 Minuten scharf anbraten.", "Kurz mit der Tomatensauce köcheln, mit der Pasta vermengen, mit Parmesan abrunden."],
+            note: "Eine Tasse Nudelwasser aufheben — ein Schuss davon macht jede Sauce seidig und bindet sie an die Pasta.",
           },
           {
-            mealType: "dinner", title: "Beef Chili with Rice", foods: "150g ground beef, kidney beans, 70g rice (dry), tomatoes", servingSize: "1 bowl", calories: 630, protein: 42, carbs: 65, fat: 20,
-            prep: ["Brown the beef properly in a hot pot.", "Add beans and tomatoes, simmer at least 20 minutes.", "Serve over the rice."],
-            note: "Chili is always better on day two — double the batch and thank yourself tomorrow.",
+            mealType: "lunch", title: "Hähnchen-Burrito-Bowl", foods: "150g Hähnchen, 80g Reis (roh), schwarze Bohnen, Mais, Salsa", servingSize: "1 Bowl", calories: 660, protein: 48, carbs: 80, fat: 14,
+            prep: ["Reis kochen; Hähnchen mit Kreuzkümmel und Paprika würzen und anbraten.", "Bohnen und Mais erwärmen.", "Bowl zusammenstellen und mit Salsa toppen."],
+            note: "15 Minuten in Limettensaft marinieren macht das Hähnchen zarter und die ganze Bowl frischer.",
           },
           {
-            mealType: "dinner", title: "Turkey Bolognese with Pasta", foods: "150g ground turkey, 100g whole grain pasta (dry), tomato sauce", servingSize: "1 plate", calories: 610, protein: 48, carbs: 75, fat: 12,
-            prep: ["Brown the ground turkey with onion and garlic.", "Add the tomato sauce and simmer 15 minutes.", "Toss with the cooked pasta."],
-            note: "A small pinch of sugar in the sauce balances the tomato acidity perfectly.",
+            mealType: "lunch", title: "Lachs mit Süßkartoffelpüree", foods: "180g Lachs, 300g Süßkartoffel, 10g Butter, Blattgemüse", servingSize: "1 Teller", calories: 640, protein: 40, carbs: 60, fat: 24,
+            prep: ["Süßkartoffel 15 Minuten kochen, dann mit Butter stampfen.", "Lachs 3–4 Minuten auf der Hautseite braten, dann 2 weitere Minuten.", "Mit dem Blattgemüse servieren."],
+            note: "Mit der Hautseite nach unten starten und nicht bewegen — diese Geduld ist das ganze Geheimnis knuspriger Haut.",
+          },
+        ],
+      },
+      {
+        options: [
+          {
+            mealType: "snack", title: "Griechischer Joghurt mit Granola & Honig", foods: "200g griechischer Joghurt, 40g Granola, 1 TL Honig", servingSize: "1 Schüssel", calories: 380, protein: 20, carbs: 50, fat: 10,
+            prep: ["Joghurt, Granola und Honig in einer Schüssel schichten."],
+            note: "Granola erst kurz vor dem Essen dazugeben, damit es knusprig bleibt.",
+          },
+          {
+            mealType: "snack", title: "Reiswaffeln mit Erdnussbutter", foods: "4 Reiswaffeln, 20g Erdnussbutter, 1 Banane", servingSize: "1 Portion", calories: 370, protein: 12, carbs: 50, fat: 14,
+            prep: ["Erdnussbutter auf die Reiswaffeln streichen und mit Bananenscheiben belegen."],
+            note: "Eine winzige Prise Meersalz auf der Banane lässt die Süße richtig knallen.",
+          },
+          {
+            mealType: "snack", title: "Käsebrot", foods: "2 Scheiben Vollkornbrot, 2 Scheiben Gouda, Butter", servingSize: "1 Sandwich", calories: 390, protein: 18, carbs: 40, fat: 16,
+            prep: ["Brot buttern, Gouda drauflegen, fertig."],
+            note: "Alter Gouda hat viel mehr Geschmack pro Gramm — du brauchst weniger davon.",
+          },
+        ],
+      },
+      {
+        options: [
+          {
+            mealType: "dinner", title: "Hähnchenschenkel mit Reis & Gemüse", foods: "180g Hähnchenschenkel, 80g Jasminreis (roh), Gemüsemix", servingSize: "1 Teller", calories: 620, protein: 45, carbs: 70, fat: 16,
+            prep: ["Schenkel würzen und 25 Minuten bei 200°C mit der Hautseite nach oben braten.", "Reis kochen; Gemüse dämpfen oder anbraten.", "Hähnchen 5 Minuten ruhen lassen, dann servieren."],
+            note: "Schenkel verzeihen alles — ein paar Minuten extra machen sie zarter, nicht trockener.",
+          },
+          {
+            mealType: "dinner", title: "Rinder-Chili mit Reis", foods: "150g Rinderhack, Kidneybohnen, 70g Reis (roh), Tomaten", servingSize: "1 Schüssel", calories: 630, protein: 42, carbs: 65, fat: 20,
+            prep: ["Hack in einem heißen Topf richtig anbraten.", "Bohnen und Tomaten dazu, mindestens 20 Minuten köcheln lassen.", "Über dem Reis servieren."],
+            note: "Chili schmeckt am nächsten Tag immer besser — koch die doppelte Menge und dank dir morgen selbst.",
+          },
+          {
+            mealType: "dinner", title: "Puten-Bolognese mit Pasta", foods: "150g Putenhack, 100g Vollkornpasta (roh), Tomatensauce", servingSize: "1 Teller", calories: 610, protein: 48, carbs: 75, fat: 12,
+            prep: ["Putenhack mit Zwiebeln und Knoblauch anbraten.", "Tomatensauce dazugeben und 15 Minuten köcheln.", "Mit der gekochten Pasta vermengen."],
+            note: "Eine kleine Prise Zucker in der Sauce gleicht die Tomatensäure perfekt aus.",
           },
         ],
       },
@@ -263,91 +263,91 @@ const PLANS: Plan[] = [
     id: "cheat",
     name: "Cheat Day",
     shortName: "Cheat Day",
-    tagline: "Enjoy guilt-free once a week — it helps you stay on track long-term",
+    tagline: "Einmal pro Woche ohne schlechtes Gewissen genießen — das hilft beim Dranbleiben",
     gradient: "from-rose-950 via-slate-900 to-slate-800",
     slots: [
       {
         options: [
           {
-            mealType: "breakfast", title: "Fluffy Pancakes with Maple Syrup", foods: "3 pancakes, maple syrup, 2 strips bacon, butter", servingSize: "1 stack", calories: 650, protein: 18, carbs: 85, fat: 26,
-            prep: ["Mix the batter until just combined — lumps are fine.", "Cook on a buttered griddle until bubbles form, then flip once.", "Crisp the bacon, stack everything, drown in maple syrup."],
-            note: "Overmixing develops gluten and makes pancakes tough — stop stirring while it's still lumpy.",
+            mealType: "breakfast", title: "Fluffige Pancakes mit Ahornsirup", foods: "3 Pancakes, Ahornsirup, 2 Streifen Bacon, Butter", servingSize: "1 Stapel", calories: 650, protein: 18, carbs: 85, fat: 26,
+            prep: ["Teig nur kurz verrühren — Klümpchen sind völlig okay.", "Auf der gebutterten Pfanne backen, bis Bläschen entstehen, dann einmal wenden.", "Bacon knusprig braten, alles stapeln, in Ahornsirup ertränken."],
+            note: "Zu viel Rühren entwickelt Gluten und macht Pancakes zäh — aufhören, solange der Teig klumpig ist.",
           },
           {
-            mealType: "breakfast", title: "French Toast with Berries & Cream", foods: "3 slices french toast, berries, whipped cream, powdered sugar", servingSize: "1 plate", calories: 620, protein: 16, carbs: 75, fat: 28,
-            prep: ["Whisk eggs, milk, cinnamon and vanilla.", "Soak the bread 30 seconds per side.", "Fry golden in butter, top with berries and cream."],
-            note: "Day-old bread soaks up the custard without falling apart — fresh bread turns mushy.",
-          },
-        ],
-      },
-      {
-        options: [
-          {
-            mealType: "lunch", title: "Cheeseburger with Fries", foods: "1 cheeseburger, medium fries, ketchup & mayo", servingSize: "1 meal", calories: 850, protein: 35, carbs: 80, fat: 42,
-            prep: ["Form loose patties and season only the outside.", "Sear hot, add the cheese for the final minute.", "Toast the buns, stack, serve with fries."],
-            note: "Press a small dimple into the patty center — it cooks flat instead of doming.",
-          },
-          {
-            mealType: "lunch", title: "Pizza Margherita", foods: "1 whole pizza with mozzarella, tomato & basil", servingSize: "1 pizza", calories: 900, protein: 35, carbs: 110, fat: 32,
-            prep: ["Stretch the dough, sauce it thin, add mozzarella and basil.", "Bake as hot as your oven goes, 8–10 minutes."],
-            note: "A preheated tray or pizza stone mimics a pizza oven and crisps the base properly.",
-          },
-          {
-            mealType: "lunch", title: "Döner Kebab", foods: "1 döner with meat, salad, sauce in flatbread", servingSize: "1 döner", calories: 750, protein: 35, carbs: 65, fat: 38,
-            prep: ["Warm the flatbread, load with meat, salad and both sauces."],
-            note: "Homemade version: thin-sliced chicken marinated in yogurt and paprika, seared screaming hot.",
+            mealType: "breakfast", title: "French Toast mit Beeren & Sahne", foods: "3 Scheiben French Toast, Beeren, Schlagsahne, Puderzucker", servingSize: "1 Teller", calories: 620, protein: 16, carbs: 75, fat: 28,
+            prep: ["Eier, Milch, Zimt und Vanille verquirlen.", "Brotscheiben 30 Sekunden pro Seite einweichen.", "In Butter goldbraun braten, mit Beeren und Sahne toppen."],
+            note: "Brot vom Vortag saugt die Eiermilch auf, ohne zu zerfallen — frisches Brot wird matschig.",
           },
         ],
       },
       {
         options: [
           {
-            mealType: "snack", title: "Ice Cream Sundae", foods: "3 scoops ice cream, chocolate sauce, whipped cream", servingSize: "1 sundae", calories: 420, protein: 8, carbs: 50, fat: 20,
-            prep: ["Scoop, sauce, cream — assemble and enjoy immediately."],
-            note: "Warm the chocolate sauce slightly so it flows over the cold ice cream instead of seizing.",
+            mealType: "lunch", title: "Cheeseburger mit Pommes", foods: "1 Cheeseburger, mittlere Pommes, Ketchup & Mayo", servingSize: "1 Menü", calories: 850, protein: 35, carbs: 80, fat: 42,
+            prep: ["Patties locker formen und nur außen würzen.", "Heiß anbraten, den Käse in der letzten Minute drauflegen.", "Buns toasten, stapeln, mit Pommes servieren."],
+            note: "Eine kleine Mulde in die Patty-Mitte drücken — so bleibt sie flach, statt sich zu wölben.",
           },
           {
-            mealType: "snack", title: "Chocolate Croissant", foods: "1 large pain au chocolat", servingSize: "1 piece", calories: 380, protein: 6, carbs: 42, fat: 20,
-            prep: ["Warm 3 minutes in the oven at 160°C — never the microwave."],
-            note: "The microwave turns pastry chewy; the oven brings the flaky crispness back to life.",
+            mealType: "lunch", title: "Pizza Margherita", foods: "1 ganze Pizza mit Mozzarella, Tomate & Basilikum", servingSize: "1 Pizza", calories: 900, protein: 35, carbs: 110, fat: 32,
+            prep: ["Teig ausziehen, dünn mit Sauce bestreichen, Mozzarella und Basilikum darauf.", "So heiß wie der Ofen kann backen, 8–10 Minuten."],
+            note: "Ein vorgeheiztes Blech oder ein Pizzastein imitiert den Pizzaofen und macht den Boden richtig knusprig.",
           },
           {
-            mealType: "snack", title: "Vanilla Milkshake", foods: "400ml milkshake with vanilla ice cream", servingSize: "1 shake", calories: 450, protein: 10, carbs: 55, fat: 20,
-            prep: ["Blend the ice cream with milk until just smooth."],
-            note: "Less milk means a thicker shake — and blend briefly, or it melts thin.",
-          },
-        ],
-      },
-      {
-        options: [
-          {
-            mealType: "dinner", title: "Creamy Pasta Carbonara", foods: "120g pasta (dry), bacon, cream, parmesan, egg", servingSize: "1 plate", calories: 800, protein: 28, carbs: 85, fat: 38,
-            prep: ["Crisp the bacon; cook the pasta al dente.", "Whisk egg, cream and parmesan together.", "Toss the hot pasta with the sauce off the heat."],
-            note: "Off the heat is the entire secret — over the flame you get scrambled eggs, not carbonara.",
-          },
-          {
-            mealType: "dinner", title: "Loaded Nachos with Guacamole", foods: "Tortilla chips, cheese, ground beef, guacamole, sour cream", servingSize: "1 platter", calories: 780, protein: 22, carbs: 70, fat: 45,
-            prep: ["Layer chips, cheese and seasoned beef on a tray.", "Bake 8–10 minutes at 200°C until melted.", "Top with guacamole and sour cream."],
-            note: "Layer cheese between the chip levels, not just on top — every chip deserves cheese.",
-          },
-          {
-            mealType: "dinner", title: "Schnitzel with Fries", foods: "1 pork schnitzel, fries, lemon & remoulade", servingSize: "1 plate", calories: 820, protein: 40, carbs: 70, fat: 40,
-            prep: ["Pound the schnitzel thin; bread it in flour, egg, then breadcrumbs.", "Fry in generous butterfat until deep golden.", "Serve with fries and a lemon wedge."],
-            note: "Swirl the pan gently while frying — the breading puffs into the classic wavy soufflé crust.",
+            mealType: "lunch", title: "Döner Kebab", foods: "1 Döner mit Fleisch, Salat, Sauce im Fladenbrot", servingSize: "1 Döner", calories: 750, protein: 35, carbs: 65, fat: 38,
+            prep: ["Fladenbrot erwärmen, mit Fleisch, Salat und beiden Saucen füllen."],
+            note: "Selbstgemacht: dünn geschnittenes Hähnchen in Joghurt und Paprika marinieren und brutzelnd heiß anbraten.",
           },
         ],
       },
       {
         options: [
           {
-            mealType: "snack", title: "Chocolate & Chips", foods: "50g chocolate, small bag of chips", servingSize: "1 portion", calories: 350, protein: 4, carbs: 40, fat: 19,
-            prep: ["No cooking required — pure couch enjoyment."],
-            note: "Portion into a bowl instead of eating from the bag — your future self says thanks.",
+            mealType: "snack", title: "Eisbecher", foods: "3 Kugeln Eis, Schokoladensauce, Schlagsahne", servingSize: "1 Becher", calories: 420, protein: 8, carbs: 50, fat: 20,
+            prep: ["Kugeln, Sauce, Sahne — zusammenbauen und sofort genießen."],
+            note: "Schokoladensauce leicht erwärmen, damit sie über das kalte Eis fließt, statt fest zu werden.",
           },
           {
-            mealType: "snack", title: "Cookies with Milk", foods: "3 chocolate chip cookies, 250ml milk", servingSize: "1 portion", calories: 340, protein: 8, carbs: 45, fat: 14,
-            prep: ["Warm the cookies 2 minutes in the oven for the fresh-baked effect."],
-            note: "Dunk timing matters: 3 seconds is the sweet spot before structural failure.",
+            mealType: "snack", title: "Schokocroissant", foods: "1 großes Pain au Chocolat", servingSize: "1 Stück", calories: 380, protein: 6, carbs: 42, fat: 20,
+            prep: ["3 Minuten bei 160°C im Ofen aufwärmen — niemals in der Mikrowelle."],
+            note: "Die Mikrowelle macht Blätterteig zäh; der Ofen bringt die knusprigen Schichten zurück.",
+          },
+          {
+            mealType: "snack", title: "Vanille-Milchshake", foods: "400ml Milchshake mit Vanilleeis", servingSize: "1 Shake", calories: 450, protein: 10, carbs: 55, fat: 20,
+            prep: ["Eis mit Milch mixen, bis es gerade glatt ist."],
+            note: "Weniger Milch heißt dickerer Shake — und nur kurz mixen, sonst schmilzt er dünn.",
+          },
+        ],
+      },
+      {
+        options: [
+          {
+            mealType: "dinner", title: "Cremige Pasta Carbonara", foods: "120g Pasta (roh), Speck, Sahne, Parmesan, Ei", servingSize: "1 Teller", calories: 800, protein: 28, carbs: 85, fat: 38,
+            prep: ["Speck knusprig braten; Pasta al dente kochen.", "Ei, Sahne und Parmesan verquirlen.", "Die heiße Pasta abseits der Hitze mit der Sauce vermengen."],
+            note: "Abseits der Hitze ist das ganze Geheimnis — auf der Flamme gibt's Rührei statt Carbonara.",
+          },
+          {
+            mealType: "dinner", title: "Loaded Nachos mit Guacamole", foods: "Tortillachips, Käse, Rinderhack, Guacamole, Sour Cream", servingSize: "1 Platte", calories: 780, protein: 22, carbs: 70, fat: 45,
+            prep: ["Chips, Käse und gewürztes Hack auf einem Blech schichten.", "8–10 Minuten bei 200°C backen, bis alles geschmolzen ist.", "Mit Guacamole und Sour Cream toppen."],
+            note: "Käse zwischen die Chip-Schichten geben, nicht nur obendrauf — jeder Chip verdient Käse.",
+          },
+          {
+            mealType: "dinner", title: "Schnitzel mit Pommes", foods: "1 Schweineschnitzel, Pommes, Zitrone & Remoulade", servingSize: "1 Teller", calories: 820, protein: 40, carbs: 70, fat: 40,
+            prep: ["Schnitzel dünn klopfen; in Mehl, Ei und Semmelbröseln panieren.", "In reichlich Butterschmalz goldbraun ausbacken.", "Mit Pommes und einem Zitronenschnitz servieren."],
+            note: "Die Pfanne beim Braten sanft schwenken — so souffliert die Panade zu den klassischen Wellen.",
+          },
+        ],
+      },
+      {
+        options: [
+          {
+            mealType: "snack", title: "Schoki & Chips", foods: "50g Schokolade, kleine Tüte Chips", servingSize: "1 Portion", calories: 350, protein: 4, carbs: 40, fat: 19,
+            prep: ["Kein Kochen nötig — purer Couch-Genuss."],
+            note: "In eine Schüssel portionieren statt aus der Tüte essen — dein zukünftiges Ich sagt danke.",
+          },
+          {
+            mealType: "snack", title: "Cookies mit Milch", foods: "3 Chocolate-Chip-Cookies, 250ml Milch", servingSize: "1 Portion", calories: 340, protein: 8, carbs: 45, fat: 14,
+            prep: ["Cookies 2 Minuten im Ofen aufwärmen für den Frisch-gebacken-Effekt."],
+            note: "Das Dunk-Timing zählt: 3 Sekunden sind der Sweet Spot vor dem Struktur-Kollaps.",
           },
         ],
       },
@@ -415,9 +415,9 @@ export function MealPlans() {
     try {
       await createEntry.mutateAsync({ data: entryData(meal) });
       invalidate();
-      toast({ title: "Meal logged!", description: `${meal.title} added to today's log.` });
+      toast({ title: "Mahlzeit geloggt!", description: `${meal.title} wurde zu deinem Tag hinzugefügt.` });
     } catch {
-      toast({ title: "Error", description: "Could not log the meal. Please try again.", variant: "destructive" });
+      toast({ title: "Fehler", description: "Mahlzeit konnte nicht geloggt werden. Bitte versuche es erneut.", variant: "destructive" });
     } finally {
       setLoggingKey(null);
     }
@@ -430,10 +430,10 @@ export function MealPlans() {
         await createEntry.mutateAsync({ data: entryData(meal) });
       }
       invalidate();
-      toast({ title: "Full day logged!", description: `All ${selectedMeals.length} meals from "${plan.name}" added to today.` });
+      toast({ title: "Ganzer Tag geloggt!", description: `Alle ${selectedMeals.length} Mahlzeiten aus "${plan.name}" wurden hinzugefügt.` });
     } catch {
       invalidate();
-      toast({ title: "Error", description: "Some meals could not be logged. Check today's log.", variant: "destructive" });
+      toast({ title: "Fehler", description: "Einige Mahlzeiten konnten nicht geloggt werden. Prüfe deine heutigen Einträge.", variant: "destructive" });
     } finally {
       setLoggingDay(false);
     }
@@ -444,8 +444,8 @@ export function MealPlans() {
       <div className="flex flex-col min-h-full bg-slate-50">
         <div className="px-5 pt-5 pb-6 space-y-5">
           <header>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Meal Plans</h1>
-            <p className="text-sm text-slate-500">Optimized daily plans — swap alternatives & log with one tap</p>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Ernährungspläne</h1>
+            <p className="text-sm text-slate-500">Optimierte Tagespläne — Alternativen tauschen & mit einem Tipp loggen</p>
           </header>
 
           {/* Plan toggle */}
@@ -495,13 +495,13 @@ export function MealPlans() {
                     <span className="text-4xl font-black tracking-tighter tabular-nums leading-none">
                       {totals.kcal}
                     </span>
-                    <span className="text-white/60 text-sm mb-0.5">kcal / day</span>
+                    <span className="text-white/60 text-sm mb-0.5">kcal / Tag</span>
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       { label: "Protein", value: totals.protein, icon: <Dumbbell className="w-3.5 h-3.5 text-blue-300" /> },
-                      { label: "Carbs",   value: totals.carbs,   icon: <Wheat    className="w-3.5 h-3.5 text-emerald-300" /> },
-                      { label: "Fat",     value: totals.fat,     icon: <Droplet  className="w-3.5 h-3.5 text-orange-300" /> },
+                      { label: "Kohlenh.", value: totals.carbs,  icon: <Wheat    className="w-3.5 h-3.5 text-emerald-300" /> },
+                      { label: "Fett",    value: totals.fat,     icon: <Droplet  className="w-3.5 h-3.5 text-orange-300" /> },
                     ].map((m) => (
                       <div key={m.label} className="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2.5">
                         <div className="flex items-center gap-1.5 mb-0.5">
@@ -523,9 +523,9 @@ export function MealPlans() {
                 data-testid="button-log-full-day"
               >
                 {loggingDay ? (
-                  <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Logging day…</>
+                  <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Tag wird geloggt…</>
                 ) : (
-                  <><CalendarPlus className="w-4 h-4 mr-2" /> Log entire day</>
+                  <><CalendarPlus className="w-4 h-4 mr-2" /> Ganzen Tag loggen</>
                 )}
               </Button>
 
@@ -564,7 +564,7 @@ export function MealPlans() {
                           <h3 className="font-semibold text-slate-900">{meal.title}</h3>
                           <p className="text-xs text-slate-500 mt-1 leading-relaxed">{meal.foods}</p>
                           <p className="text-[11px] text-slate-400 mt-2">
-                            {meal.protein}g P · {meal.carbs}g C · {meal.fat}g F
+                            {meal.protein}g P · {meal.carbs}g K · {meal.fat}g F
                           </p>
 
                           {/* Preparation & chef's note (expandable) */}
@@ -576,7 +576,7 @@ export function MealPlans() {
                           >
                             <span className="flex items-center gap-2 text-xs font-semibold text-amber-800">
                               <ChefHat className="w-4 h-4 text-amber-600" />
-                              Recipe & chef's note
+                              Zubereitung & Chef-Tipp
                             </span>
                             <ChevronDown
                               className={`w-4 h-4 text-amber-600 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
@@ -605,7 +605,7 @@ export function MealPlans() {
                                 <div className="mt-3 flex gap-2 bg-amber-50 border border-amber-100 rounded-xl p-3">
                                   <Lightbulb className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                                   <p className="text-[11px] text-amber-800 leading-relaxed">
-                                    <span className="font-semibold">Chef's note:</span> {meal.note}
+                                    <span className="font-semibold">Chef-Tipp:</span> {meal.note}
                                   </p>
                                 </div>
                               </motion.div>
@@ -623,7 +623,7 @@ export function MealPlans() {
                             className="flex-1 py-2 flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 active:bg-slate-200 rounded-xl transition-colors disabled:opacity-50"
                           >
                             <RefreshCw className="w-3.5 h-3.5" />
-                            Swap ({selIdx + 1}/{slot.options.length})
+                            Tauschen ({selIdx + 1}/{slot.options.length})
                           </button>
                         )}
                         <button
@@ -633,9 +633,9 @@ export function MealPlans() {
                           className="flex-1 py-2 flex items-center justify-center gap-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-100 rounded-xl transition-colors disabled:opacity-50"
                         >
                           {loggingKey === key ? (
-                            <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Logging…</>
+                            <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Wird geloggt…</>
                           ) : (
-                            <><Plus className="w-3.5 h-3.5" /> Log this meal</>
+                            <><Plus className="w-3.5 h-3.5" /> Mahlzeit loggen</>
                           )}
                         </button>
                       </div>
@@ -646,8 +646,8 @@ export function MealPlans() {
 
               <p className="text-[11px] text-slate-400 text-center px-4 leading-relaxed">
                 {plan.id === "cheat"
-                  ? "A cheat day once a week can help you stay consistent — get back to your plan tomorrow."
-                  : "Values are estimates for an average adult. Adjust portions to your body weight and activity level (protein: ~2g per kg body weight)."}
+                  ? "Ein Cheat Day pro Woche kann dir helfen, langfristig dranzubleiben — morgen geht's zurück zum Plan."
+                  : "Die Werte sind Schätzungen für einen durchschnittlichen Erwachsenen. Passe die Portionen an dein Körpergewicht und deine Aktivität an (Protein: ~2g pro kg Körpergewicht)."}
               </p>
             </motion.div>
           </AnimatePresence>

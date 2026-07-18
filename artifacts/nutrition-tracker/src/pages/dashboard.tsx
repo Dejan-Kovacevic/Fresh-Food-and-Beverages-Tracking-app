@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { format } from "date-fns";
+import { de } from "date-fns/locale";
 import {
   useGetDailySummary,
   useListEntries,
@@ -17,10 +18,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const MACRO_GOALS = { protein: 150, carbs: 250, fat: 65 };
 
 const MEAL_META: Record<string, { icon: React.ReactNode; label: string }> = {
-  breakfast: { icon: <Coffee className="w-4 h-4 text-amber-500" />, label: "Breakfast" },
-  lunch:     { icon: <Sun    className="w-4 h-4 text-orange-500" />, label: "Lunch" },
+  breakfast: { icon: <Coffee className="w-4 h-4 text-amber-500" />, label: "Frühstück" },
+  lunch:     { icon: <Sun    className="w-4 h-4 text-orange-500" />, label: "Mittagessen" },
   snack:     { icon: <Apple  className="w-4 h-4 text-green-500"  />, label: "Snack" },
-  dinner:    { icon: <Moon   className="w-4 h-4 text-indigo-400" />, label: "Dinner" },
+  dinner:    { icon: <Moon   className="w-4 h-4 text-indigo-400" />, label: "Abendessen" },
 };
 
 const MEAL_ORDER = ["breakfast", "lunch", "snack", "dinner"] as const;
@@ -68,14 +69,14 @@ export function Dashboard() {
       trackColor: "#dbeafe",
     },
     {
-      name: "Carbs",
+      name: "Kohlenhydrate",
       current: summary?.totalCarbs ?? 0,
       goal: MACRO_GOALS.carbs,
       strokeColor: "#34d399",
       trackColor: "#d1fae5",
     },
     {
-      name: "Fat",
+      name: "Fett",
       current: summary?.totalFat ?? 0,
       goal: MACRO_GOALS.fat,
       strokeColor: "#fb923c",
@@ -109,7 +110,7 @@ export function Dashboard() {
             </div>
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
               <Calendar className="w-4 h-4 text-indigo-300" />
-              <span className="text-sm font-medium">{format(new Date(), "MMMM d")}</span>
+              <span className="text-sm font-medium">{format(new Date(), "d. MMMM", { locale: de })}</span>
             </div>
             <Link href="/history">
               <button className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/10">
@@ -145,7 +146,7 @@ export function Dashboard() {
                 </svg>
                 <div className="absolute flex flex-col items-center justify-center text-center">
                   <span className="text-indigo-300 font-medium tracking-widest uppercase text-[10px] mb-1">
-                    Remaining
+                    Übrig
                   </span>
                   <span className="text-6xl font-black tracking-tighter text-white tabular-nums leading-none">
                     {remaining}
@@ -159,8 +160,8 @@ export function Dashboard() {
           {/* Sub-text */}
           <p className="text-center text-indigo-200 text-sm font-medium relative z-10">
             {isLoadingSummary
-              ? "Loading…"
-              : `${consumed} kcal consumed · goal ${calorieGoal}`}
+              ? "Lädt…"
+              : `${consumed} kcal gegessen · Ziel ${calorieGoal}`}
           </p>
         </div>
 
@@ -220,9 +221,9 @@ export function Dashboard() {
         {/* ── Food Log ── */}
         <div className="flex-1 px-5 pt-8 pb-6">
           <div className="flex justify-between items-center mb-5">
-            <h2 className="text-xl font-bold text-slate-900">Today's Log</h2>
+            <h2 className="text-xl font-bold text-slate-900">Heutige Einträge</h2>
             <Link href="/history" className="text-indigo-600 font-semibold text-sm">
-              History
+              Verlauf
             </Link>
           </div>
 
@@ -237,13 +238,13 @@ export function Dashboard() {
               <div className="w-14 h-14 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-3">
                 <Flame className="w-7 h-7 text-slate-300" />
               </div>
-              <h3 className="font-semibold text-slate-700">Nothing logged yet</h3>
+              <h3 className="font-semibold text-slate-700">Noch nichts geloggt</h3>
               <p className="text-sm text-slate-400 mb-5 mt-1">
-                Start tracking to see your macros.
+                Beginne zu tracken, um deine Makros zu sehen.
               </p>
               <Link href="/add">
                 <button className="h-10 bg-indigo-600 text-white rounded-full px-7 text-sm font-semibold shadow-md shadow-indigo-600/25 hover:bg-indigo-700 transition-colors">
-                  Log Food
+                  Essen loggen
                 </button>
               </Link>
             </div>
@@ -292,7 +293,7 @@ export function Dashboard() {
                             </p>
                             <p className="text-[11px] text-slate-400 mt-0.5">
                               {entry.servingSize ? `${entry.servingSize} · ` : ""}
-                              {entry.protein}g P · {entry.carbs}g C · {entry.fat}g F
+                              {entry.protein}g P · {entry.carbs}g K · {entry.fat}g F
                             </p>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
@@ -318,7 +319,7 @@ export function Dashboard() {
                     <Link href={`/add?meal=${mealType}`}>
                       <button className="w-full mt-4 py-2 flex items-center justify-center gap-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-100 rounded-xl transition-colors">
                         <Plus className="w-3.5 h-3.5" />
-                        Add to {meta.label}
+                        Zum {meta.label} hinzufügen
                       </button>
                     </Link>
                   </div>

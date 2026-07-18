@@ -37,7 +37,8 @@ Rules:
 - calories/protein/carbs/fat are numbers (no units in values)
 - confidence is "high" for common foods, "medium" for estimates, "low" for vague descriptions
 - notes can be null or a brief clarification
-- Be accurate: 1 large egg is ~70 cal, 6g protein, 0g carbs, 5g fat`;
+- Be accurate: 1 large egg is ~70 cal, 6g protein, 0g carbs, 5g fat
+- Write "name", "servingSize" and "notes" in German (e.g. "Haferflocken mit Banane", "1 Schüssel (240g)")`;
 
   try {
     const completion = await openai.chat.completions.create({
@@ -77,7 +78,7 @@ Rules:
       protein: Number(result.protein) || 0,
       carbs: Number(result.carbs) || 0,
       fat: Number(result.fat) || 0,
-      servingSize: String(result.servingSize || "1 serving"),
+      servingSize: String(result.servingSize || "1 Portion"),
       confidence: ["high", "medium", "low"].includes(result.confidence) ? result.confidence : "medium",
       notes: result.notes || null,
     });
@@ -105,8 +106,9 @@ Rules:
 - calories/protein/carbs/fat are numbers (no units in values)
 - confidence is "high" for clearly visible food, "medium" for partially visible, "low" for unclear images
 - notes can be null or a brief clarification about what was identified
-- If multiple foods are visible, combine totals and list items in the name (e.g. "Chicken, rice and salad plate")
-- Estimate portion size from visual cues (plate size, hand size etc.)`;
+- If multiple foods are visible, combine totals and list items in the name (e.g. "Hähnchen, Reis und Salat")
+- Estimate portion size from visual cues (plate size, hand size etc.)
+- Write "name", "servingSize" and "notes" in German (e.g. "1 Teller (ca. 400g)")`;
 
 // POST /analyze-food-image
 router.post("/analyze-food-image", async (req, res): Promise<void> => {
@@ -164,12 +166,12 @@ router.post("/analyze-food-image", async (req, res): Promise<void> => {
     }
 
     res.json({
-      name: String(result.name || "Unknown food"),
+      name: String(result.name || "Unbekanntes Essen"),
       calories: Number(result.calories) || 0,
       protein: Number(result.protein) || 0,
       carbs: Number(result.carbs) || 0,
       fat: Number(result.fat) || 0,
-      servingSize: String(result.servingSize || "1 serving"),
+      servingSize: String(result.servingSize || "1 Portion"),
       confidence: ["high", "medium", "low"].includes(result.confidence) ? result.confidence : "medium",
       notes: result.notes || null,
     });

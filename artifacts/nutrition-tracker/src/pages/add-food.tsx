@@ -25,7 +25,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Sparkles, Loader2, ArrowLeft, Camera, X, ScanLine } from "lucide-react";
 
 const entrySchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z.string().min(1, "Name ist erforderlich"),
   calories: z.coerce.number().min(0),
   protein: z.coerce.number().min(0),
   carbs: z.coerce.number().min(0),
@@ -101,7 +101,7 @@ export function AddFood() {
     setAnalysisResult(values);
     form.reset(values);
     if (result.notes) {
-      toast({ title: "AI Note", description: result.notes });
+      toast({ title: "KI-Hinweis", description: result.notes });
     }
   };
 
@@ -112,7 +112,7 @@ export function AddFood() {
       {
         onSuccess: applyResult,
         onError: () =>
-          toast({ title: "Analysis Failed", description: "Could not analyze. Try manual entry.", variant: "destructive" }),
+          toast({ title: "Analyse fehlgeschlagen", description: "Konnte nicht analysiert werden. Versuche die manuelle Eingabe.", variant: "destructive" }),
       }
     );
   };
@@ -135,7 +135,7 @@ export function AddFood() {
         {
           onSuccess: applyResult,
           onError: () =>
-            toast({ title: "Scan Failed", description: "Could not analyze the image. Try describing the food instead.", variant: "destructive" }),
+            toast({ title: "Scan fehlgeschlagen", description: "Das Bild konnte nicht analysiert werden. Beschreibe das Essen stattdessen.", variant: "destructive" }),
         }
       );
     };
@@ -158,11 +158,11 @@ export function AddFood() {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getListEntriesQueryKey({ date: today }) });
           queryClient.invalidateQueries({ queryKey: getGetDailySummaryQueryKey({ date: today }) });
-          toast({ title: "Food Logged!", description: "Your meal has been recorded successfully." });
+          toast({ title: "Essen geloggt!", description: "Deine Mahlzeit wurde erfolgreich gespeichert." });
           setLocation("/");
         },
         onError: () =>
-          toast({ title: "Error", description: "Failed to log food. Please try again.", variant: "destructive" }),
+          toast({ title: "Fehler", description: "Essen konnte nicht geloggt werden. Bitte versuche es erneut.", variant: "destructive" }),
       }
     );
   };
@@ -176,7 +176,7 @@ export function AddFood() {
           <Button variant="ghost" size="icon" onClick={() => setLocation("/")} className="-ml-2" data-testid="button-back">
             <ArrowLeft className="w-5 h-5" />
           </Button>
-          <h1 className="text-2xl font-bold tracking-tight">Add Food</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Essen hinzufügen</h1>
         </header>
 
         {/* Hidden file input for camera / gallery */}
@@ -211,7 +211,7 @@ export function AddFood() {
                   }`}
                 >
                   <Sparkles className="w-4 h-4" />
-                  Describe
+                  Beschreiben
                 </button>
                 <button
                   onClick={() => setInputMode("camera")}
@@ -223,7 +223,7 @@ export function AddFood() {
                   }`}
                 >
                   <Camera className="w-4 h-4" />
-                  Scan
+                  Scannen
                 </button>
               </div>
 
@@ -238,14 +238,14 @@ export function AddFood() {
                   >
                     <div className="relative">
                       <Textarea
-                        placeholder="E.g. A bowl of oatmeal with a sliced banana and a tablespoon of peanut butter..."
+                        placeholder="Z.B. Eine Schüssel Haferflocken mit einer Banane und einem Esslöffel Erdnussbutter..."
                         className="min-h-[160px] text-base p-4 resize-none border-2 focus-visible:ring-primary shadow-sm"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         data-testid="input-description"
                       />
                       <div className="absolute bottom-3 right-3 text-muted-foreground flex items-center gap-1 text-xs font-medium">
-                        <Sparkles className="w-3 h-3 text-primary" /> AI Powered
+                        <Sparkles className="w-3 h-3 text-primary" /> KI-gestützt
                       </div>
                     </div>
                     <Button
@@ -256,9 +256,9 @@ export function AddFood() {
                       data-testid="button-analyze"
                     >
                       {isAnalyzing ? (
-                        <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Analyzing...</>
+                        <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Analysiere...</>
                       ) : (
-                        "Analyze Food"
+                        "Essen analysieren"
                       )}
                     </Button>
                   </motion.div>
@@ -277,7 +277,7 @@ export function AddFood() {
                           <div className="relative">
                             <ScanLine className="w-10 h-10 text-primary animate-pulse" />
                           </div>
-                          <p className="text-white font-semibold text-sm">Analyzing your food...</p>
+                          <p className="text-white font-semibold text-sm">Dein Essen wird analysiert...</p>
                         </div>
                       </div>
                     ) : (
@@ -291,8 +291,8 @@ export function AddFood() {
                           <Camera className="w-8 h-8 text-primary" />
                         </div>
                         <div className="text-center">
-                          <p className="font-bold text-foreground">Take a photo or upload</p>
-                          <p className="text-sm text-muted-foreground mt-1">AI will identify the food and estimate calories</p>
+                          <p className="font-bold text-foreground">Foto aufnehmen oder hochladen</p>
+                          <p className="text-sm text-muted-foreground mt-1">Die KI erkennt das Essen und schätzt die Kalorien</p>
                         </div>
                       </button>
                     )}
@@ -302,7 +302,7 @@ export function AddFood() {
 
               <div className="relative flex items-center py-2">
                 <div className="flex-grow border-t border-muted" />
-                <span className="flex-shrink-0 mx-4 text-muted-foreground text-sm font-medium">OR</span>
+                <span className="flex-shrink-0 mx-4 text-muted-foreground text-sm font-medium">ODER</span>
                 <div className="flex-grow border-t border-muted" />
               </div>
               <Button
@@ -311,7 +311,7 @@ export function AddFood() {
                 onClick={() => setInputMode("manual")}
                 data-testid="button-manual"
               >
-                Enter Manually
+                Manuell eingeben
               </Button>
             </motion.div>
           ) : (
@@ -345,10 +345,10 @@ export function AddFood() {
                   )}
                   <div>
                     <h3 className="font-semibold text-primary">
-                      {capturedImage ? "Scan Complete" : "AI Analysis Complete"}
+                      {capturedImage ? "Scan abgeschlossen" : "KI-Analyse abgeschlossen"}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Review and adjust the values below if needed before saving.
+                      Prüfe die Werte unten und passe sie bei Bedarf an, bevor du speicherst.
                     </p>
                   </div>
                 </div>
@@ -358,18 +358,18 @@ export function AddFood() {
                 <CardContent className="p-6">
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                     <div className="space-y-2">
-                      <Label>Food Name</Label>
-                      <Input {...form.register("name")} placeholder="e.g. Oatmeal" className="font-semibold" data-testid="input-name" />
+                      <Label>Name</Label>
+                      <Input {...form.register("name")} placeholder="z.B. Haferflocken" className="font-semibold" data-testid="input-name" />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label>Calories</Label>
+                        <Label>Kalorien</Label>
                         <Input type="number" step="any" {...form.register("calories")} className="font-bold text-primary tabular-nums" data-testid="input-calories" />
                       </div>
                       <div className="space-y-2">
-                        <Label>Serving Size</Label>
-                        <Input {...form.register("servingSize")} placeholder="e.g. 1 bowl" data-testid="input-serving" />
+                        <Label>Portionsgröße</Label>
+                        <Input {...form.register("servingSize")} placeholder="z.B. 1 Schüssel" data-testid="input-serving" />
                       </div>
                     </div>
 
@@ -379,28 +379,28 @@ export function AddFood() {
                         <Input type="number" step="any" {...form.register("protein")} className="tabular-nums" data-testid="input-protein" />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-xs uppercase text-chart-3">Carbs (g)</Label>
+                        <Label className="text-xs uppercase text-chart-3">Kohlenh. (g)</Label>
                         <Input type="number" step="any" {...form.register("carbs")} className="tabular-nums" data-testid="input-carbs" />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-xs uppercase text-chart-4">Fat (g)</Label>
+                        <Label className="text-xs uppercase text-chart-4">Fett (g)</Label>
                         <Input type="number" step="any" {...form.register("fat")} className="tabular-nums" data-testid="input-fat" />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Meal Type</Label>
+                      <Label>Mahlzeit</Label>
                       <Select
                         onValueChange={(val: "breakfast" | "lunch" | "dinner" | "snack") => form.setValue("mealType", val)}
                         defaultValue={form.getValues("mealType")}
                       >
                         <SelectTrigger data-testid="select-meal-type">
-                          <SelectValue placeholder="Select meal" />
+                          <SelectValue placeholder="Mahlzeit wählen" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="breakfast">Breakfast</SelectItem>
-                          <SelectItem value="lunch">Lunch</SelectItem>
-                          <SelectItem value="dinner">Dinner</SelectItem>
+                          <SelectItem value="breakfast">Frühstück</SelectItem>
+                          <SelectItem value="lunch">Mittagessen</SelectItem>
+                          <SelectItem value="dinner">Abendessen</SelectItem>
                           <SelectItem value="snack">Snack</SelectItem>
                         </SelectContent>
                       </Select>
@@ -414,7 +414,7 @@ export function AddFood() {
                         onClick={handleReset}
                         data-testid="button-cancel"
                       >
-                        Cancel
+                        Abbrechen
                       </Button>
                       <Button
                         type="submit"
@@ -423,7 +423,7 @@ export function AddFood() {
                         data-testid="button-save-food"
                       >
                         {createEntry.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                        Log Food
+                        Loggen
                       </Button>
                     </div>
                   </form>

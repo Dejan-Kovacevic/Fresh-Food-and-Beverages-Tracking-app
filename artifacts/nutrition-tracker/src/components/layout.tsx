@@ -17,10 +17,10 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
   const [location] = useLocation();
 
   const navItems = [
-    { href: "/", label: "Today", icon: Home },
-    { href: "/add", label: "Add Food", icon: Plus },
-    { href: "/plans", label: "Plans", icon: ClipboardList },
-    { href: "/history", label: "History", icon: History },
+    { href: "/", id: "today", label: "Heute", icon: Home },
+    { href: "/add", id: "add-food", label: "Hinzufügen", icon: Plus },
+    { href: "/plans", id: "plans", label: "Pläne", icon: ClipboardList },
+    { href: "/history", id: "history", label: "Verlauf", icon: History },
   ];
 
   return (
@@ -56,7 +56,7 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
                     ? "text-primary scale-110" 
                     : "text-muted-foreground hover:text-foreground"
                 )}
-                data-testid={`nav-${item.label.toLowerCase()}`}
+                data-testid={`nav-${item.id}`}
               >
                 <div className={cn(
                   "p-1 rounded-full transition-colors",
