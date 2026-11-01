@@ -8,6 +8,7 @@ import { Dashboard } from "@/pages/dashboard";
 import { AddFood } from "@/pages/add-food";
 import { History } from "@/pages/history";
 import { MealPlans } from "@/pages/meal-plans";
+import { Fitness } from "@/pages/fitness";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/add" component={AddFood} />
       <Route path="/plans" component={MealPlans} />
       <Route path="/history" component={History} />
+      <Route path="/fitness" component={Fitness} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -22,6 +22,9 @@ import type {
 import type {
   DailySummary,
   DayCalories,
+  FitnessDashboard,
+  FitnessReminderInput,
+  FitnessVisitInput,
   FoodAnalysisRequest,
   FoodAnalysisResult,
   FoodEntry,
@@ -29,9 +32,11 @@ import type {
   FoodEntryUpdate,
   FoodImageAnalysisRequest,
   GetDailySummaryParams,
+  GetFitnessPushConfig200,
   GetHistoryParams,
   HealthStatus,
-  ListEntriesParams
+  ListEntriesParams,
+  TestFitnessReminder200
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -45,6 +50,506 @@ type AwaitedInput<T> = PromiseLike<T> | T;
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
+
+export const getGetFitnessUrl = () => {
+
+
+
+
+  return `/api/fitness`
+}
+
+/**
+ * @summary Fitness goal, visits and reminder status for this browser
+ */
+export const getFitness = async ( options?: RequestInit): Promise<FitnessDashboard> => {
+
+  return customFetch<FitnessDashboard>(getGetFitnessUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetFitnessQueryKey = () => {
+    return [
+    `/api/fitness`
+    ] as const;
+    }
+
+
+export const getGetFitnessQueryOptions = <TData = Awaited<ReturnType<typeof getFitness>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getFitness>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetFitnessQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getFitness>>> = ({ signal }) => getFitness({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getFitness>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetFitnessQueryResult = NonNullable<Awaited<ReturnType<typeof getFitness>>>
+export type GetFitnessQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Fitness goal, visits and reminder status for this browser
+ */
+
+export function useGetFitness<TData = Awaited<ReturnType<typeof getFitness>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getFitness>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetFitnessQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getCreateFitnessVisitUrl = () => {
+
+
+
+
+  return `/api/fitness/visits`
+}
+
+/**
+ * @summary Record one gym visit per day
+ */
+export const createFitnessVisit = async (fitnessVisitInput: FitnessVisitInput, options?: RequestInit): Promise<FitnessDashboard> => {
+
+  return customFetch<FitnessDashboard>(getCreateFitnessVisitUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      fitnessVisitInput,)
+  }
+);}
+
+
+
+
+export const getCreateFitnessVisitMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createFitnessVisit>>, TError,{data: BodyType<FitnessVisitInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createFitnessVisit>>, TError,{data: BodyType<FitnessVisitInput>}, TContext> => {
+
+const mutationKey = ['createFitnessVisit'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createFitnessVisit>>, {data: BodyType<FitnessVisitInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createFitnessVisit(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateFitnessVisitMutationResult = NonNullable<Awaited<ReturnType<typeof createFitnessVisit>>>
+    export type CreateFitnessVisitMutationBody = BodyType<FitnessVisitInput>
+    export type CreateFitnessVisitMutationError = ErrorType<void>
+
+    /**
+ * @summary Record one gym visit per day
+ */
+export const useCreateFitnessVisit = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createFitnessVisit>>, TError,{data: BodyType<FitnessVisitInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createFitnessVisit>>,
+        TError,
+        {data: BodyType<FitnessVisitInput>},
+        TContext
+      > => {
+      return useMutation(getCreateFitnessVisitMutationOptions(options));
+    }
+
+export const getDeleteFitnessVisitUrl = (id: number,) => {
+
+
+
+
+  return `/api/fitness/visits/${id}`
+}
+
+/**
+ * @summary Remove a mistaken visit
+ */
+export const deleteFitnessVisit = async (id: number, options?: RequestInit): Promise<FitnessDashboard> => {
+
+  return customFetch<FitnessDashboard>(getDeleteFitnessVisitUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getDeleteFitnessVisitMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteFitnessVisit>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteFitnessVisit>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteFitnessVisit'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteFitnessVisit>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteFitnessVisit(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteFitnessVisitMutationResult = NonNullable<Awaited<ReturnType<typeof deleteFitnessVisit>>>
+
+    export type DeleteFitnessVisitMutationError = ErrorType<void>
+
+    /**
+ * @summary Remove a mistaken visit
+ */
+export const useDeleteFitnessVisit = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteFitnessVisit>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteFitnessVisit>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteFitnessVisitMutationOptions(options));
+    }
+
+export const getGetFitnessPushConfigUrl = () => {
+
+
+
+
+  return `/api/fitness/push-config`
+}
+
+export const getFitnessPushConfig = async ( options?: RequestInit): Promise<GetFitnessPushConfig200> => {
+
+  return customFetch<GetFitnessPushConfig200>(getGetFitnessPushConfigUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetFitnessPushConfigQueryKey = () => {
+    return [
+    `/api/fitness/push-config`
+    ] as const;
+    }
+
+
+export const getGetFitnessPushConfigQueryOptions = <TData = Awaited<ReturnType<typeof getFitnessPushConfig>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getFitnessPushConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetFitnessPushConfigQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getFitnessPushConfig>>> = ({ signal }) => getFitnessPushConfig({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getFitnessPushConfig>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetFitnessPushConfigQueryResult = NonNullable<Awaited<ReturnType<typeof getFitnessPushConfig>>>
+export type GetFitnessPushConfigQueryError = ErrorType<unknown>
+
+
+
+export function useGetFitnessPushConfig<TData = Awaited<ReturnType<typeof getFitnessPushConfig>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getFitnessPushConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetFitnessPushConfigQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getSaveFitnessRemindersUrl = () => {
+
+
+
+
+  return `/api/fitness/reminders`
+}
+
+/**
+ * @summary Set two weekly reminder days and schedule four weeks ahead
+ */
+export const saveFitnessReminders = async (fitnessReminderInput: FitnessReminderInput, options?: RequestInit): Promise<FitnessDashboard> => {
+
+  return customFetch<FitnessDashboard>(getSaveFitnessRemindersUrl(),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      fitnessReminderInput,)
+  }
+);}
+
+
+
+
+export const getSaveFitnessRemindersMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof saveFitnessReminders>>, TError,{data: BodyType<FitnessReminderInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof saveFitnessReminders>>, TError,{data: BodyType<FitnessReminderInput>}, TContext> => {
+
+const mutationKey = ['saveFitnessReminders'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof saveFitnessReminders>>, {data: BodyType<FitnessReminderInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  saveFitnessReminders(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SaveFitnessRemindersMutationResult = NonNullable<Awaited<ReturnType<typeof saveFitnessReminders>>>
+    export type SaveFitnessRemindersMutationBody = BodyType<FitnessReminderInput>
+    export type SaveFitnessRemindersMutationError = ErrorType<void>
+
+    /**
+ * @summary Set two weekly reminder days and schedule four weeks ahead
+ */
+export const useSaveFitnessReminders = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof saveFitnessReminders>>, TError,{data: BodyType<FitnessReminderInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof saveFitnessReminders>>,
+        TError,
+        {data: BodyType<FitnessReminderInput>},
+        TContext
+      > => {
+      return useMutation(getSaveFitnessRemindersMutationOptions(options));
+    }
+
+export const getRefreshFitnessRemindersUrl = () => {
+
+
+
+
+  return `/api/fitness/reminders/refresh`
+}
+
+/**
+ * @summary Extend reminders when the app is opened
+ */
+export const refreshFitnessReminders = async ( options?: RequestInit): Promise<FitnessDashboard> => {
+
+  return customFetch<FitnessDashboard>(getRefreshFitnessRemindersUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+export const getRefreshFitnessRemindersMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof refreshFitnessReminders>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof refreshFitnessReminders>>, TError,void, TContext> => {
+
+const mutationKey = ['refreshFitnessReminders'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof refreshFitnessReminders>>, void> = () => {
+
+
+          return  refreshFitnessReminders(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RefreshFitnessRemindersMutationResult = NonNullable<Awaited<ReturnType<typeof refreshFitnessReminders>>>
+
+    export type RefreshFitnessRemindersMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Extend reminders when the app is opened
+ */
+export const useRefreshFitnessReminders = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof refreshFitnessReminders>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof refreshFitnessReminders>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getRefreshFitnessRemindersMutationOptions(options));
+    }
+
+export const getTestFitnessReminderUrl = () => {
+
+
+
+
+  return `/api/fitness/reminders/test`
+}
+
+/**
+ * @summary Send one test notification to this device only
+ */
+export const testFitnessReminder = async ( options?: RequestInit): Promise<TestFitnessReminder200> => {
+
+  return customFetch<TestFitnessReminder200>(getTestFitnessReminderUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+export const getTestFitnessReminderMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof testFitnessReminder>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof testFitnessReminder>>, TError,void, TContext> => {
+
+const mutationKey = ['testFitnessReminder'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof testFitnessReminder>>, void> = () => {
+
+
+          return  testFitnessReminder(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type TestFitnessReminderMutationResult = NonNullable<Awaited<ReturnType<typeof testFitnessReminder>>>
+
+    export type TestFitnessReminderMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Send one test notification to this device only
+ */
+export const useTestFitnessReminder = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof testFitnessReminder>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof testFitnessReminder>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getTestFitnessReminderMutationOptions(options));
+    }
 
 export const getHealthCheckUrl = () => {
 

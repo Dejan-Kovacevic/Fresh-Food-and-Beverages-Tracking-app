@@ -1,0 +1,1 @@
+- [Fitness reminders](fitness-reminders.md) — Product goal and why closed-app reminders use a finite provider-side schedule.

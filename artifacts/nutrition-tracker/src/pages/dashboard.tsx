@@ -10,6 +10,7 @@ import {
   getListEntriesQueryKey,
 } from "@workspace/api-client-react";
 import { Layout } from "@/components/layout";
+import { GymProgressCard } from "@/components/gym-progress-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Calendar, Coffee, Sun, Apple, Moon, Plus, MoreHorizontal, Trash2, Flame } from "lucide-react";
@@ -216,6 +217,11 @@ export function Dashboard() {
               </div>
             );
           })}
+        </div>
+
+        {/* ── Gym Progress ── */}
+        <div className="px-5 pt-5">
+          <GymProgressCard />
         </div>
 
         {/* ── Food Log ── */}

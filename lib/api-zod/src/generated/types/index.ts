@@ -8,6 +8,11 @@
 
 export * from './dailySummary';
 export * from './dayCalories';
+export * from './fitnessDashboard';
+export * from './fitnessDashboardReminders';
+export * from './fitnessDashboardVisitsItem';
+export * from './fitnessReminderInput';
+export * from './fitnessVisitInput';
 export * from './foodAnalysisRequest';
 export * from './foodAnalysisResult';
 export * from './foodAnalysisResultConfidence';
@@ -19,6 +24,8 @@ export * from './foodEntryUpdate';
 export * from './foodEntryUpdateMealType';
 export * from './foodImageAnalysisRequest';
 export * from './getDailySummaryParams';
+export * from './getFitnessPushConfig200';
 export * from './getHistoryParams';
 export * from './healthStatus';
 export * from './listEntriesParams';
+export * from './testFitnessReminder200';

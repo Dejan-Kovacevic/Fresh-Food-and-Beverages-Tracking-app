@@ -5,6 +5,58 @@
  * AI Nutrition Tracker API
  * OpenAPI spec version: 0.1.0
  */
+export interface FitnessVisitInput {
+  /** @pattern ^\d{4}-\d{2}-\d{2}$ */
+  date: string;
+}
+
+export interface FitnessReminderInput {
+  enabled: boolean;
+  /**
+     * @minItems 2
+     * @maxItems 2
+     */
+  days: number[];
+  /** @pattern ^([01]\d|2[0-3]):[0-5]\d$ */
+  time: string;
+  /**
+     * @minLength 1
+     * @maxLength 80
+     */
+  timezone: string;
+  /** @nullable */
+  subscriptionId?: string | null;
+}
+
+export type FitnessDashboardVisitsItem = {
+  id: number;
+  date: string;
+};
+
+export type FitnessDashboardReminders = {
+  enabled: boolean;
+  days: number[];
+  time: string;
+  timezone: string;
+  /** @nullable */
+  scheduledUntil: string | null;
+  /** @nullable */
+  nextReminder: string | null;
+  /** @nullable */
+  error: string | null;
+  scheduledCount: number;
+};
+
+export interface FitnessDashboard {
+  goal: number;
+  weekStart: string;
+  weekEnd: string;
+  today: string;
+  count: number;
+  visits: FitnessDashboardVisitsItem[];
+  reminders: FitnessDashboardReminders;
+}
+
 export interface HealthStatus {
   status: string;
 }
@@ -123,6 +175,15 @@ export interface DayCalories {
   calories: number;
   label: string;
 }
+
+export type GetFitnessPushConfig200 = {
+  appId: string;
+  externalId: string;
+};
+
+export type TestFitnessReminder200 = {
+  message: string;
+};
 
 export type ListEntriesParams = {
 /**

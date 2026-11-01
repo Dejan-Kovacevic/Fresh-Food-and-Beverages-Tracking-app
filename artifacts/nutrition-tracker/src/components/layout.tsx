@@ -4,7 +4,8 @@ import {
   Plus, 
   History,
   Activity,
-  ClipboardList
+  ClipboardList,
+  Dumbbell
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,7 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
     { href: "/add", id: "add-food", label: "Hinzufügen", icon: Plus },
     { href: "/plans", id: "plans", label: "Pläne", icon: ClipboardList },
     { href: "/history", id: "history", label: "Verlauf", icon: History },
+    { href: "/fitness", id: "fitness", label: "Fitness", icon: Dumbbell },
   ];
 
   return (
@@ -51,7 +53,7 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
                 key={item.href} 
                 href={item.href}
                 className={cn(
-                  "flex flex-col items-center gap-1 p-2 rounded-xl transition-all w-16",
+                  "flex flex-col items-center gap-1 p-2 rounded-xl transition-all w-14",
                   isActive 
                     ? "text-primary scale-110" 
                     : "text-muted-foreground hover:text-foreground"

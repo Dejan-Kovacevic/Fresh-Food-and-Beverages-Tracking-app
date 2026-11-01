@@ -9,6 +9,160 @@ import * as zod from 'zod';
 
 
 /**
+ * @summary Fitness goal, visits and reminder status for this browser
+ */
+export const GetFitnessResponse = zod.object({
+  "goal": zod.number(),
+  "weekStart": zod.string(),
+  "weekEnd": zod.string(),
+  "today": zod.string(),
+  "count": zod.number(),
+  "visits": zod.array(zod.object({
+  "id": zod.number(),
+  "date": zod.string()
+})),
+  "reminders": zod.object({
+  "enabled": zod.boolean(),
+  "days": zod.array(zod.number()),
+  "time": zod.string(),
+  "timezone": zod.string(),
+  "scheduledUntil": zod.string().nullable(),
+  "nextReminder": zod.string().nullable(),
+  "error": zod.string().nullable(),
+  "scheduledCount": zod.number()
+})
+})
+
+
+/**
+ * @summary Record one gym visit per day
+ */
+export const createFitnessVisitBodyDateRegExp = new RegExp('^\\d{4}-\\d{2}-\\d{2}$');
+
+
+export const CreateFitnessVisitBody = zod.object({
+  "date": zod.string().regex(createFitnessVisitBodyDateRegExp)
+})
+
+
+/**
+ * @summary Remove a mistaken visit
+ */
+
+
+
+export const DeleteFitnessVisitParams = zod.object({
+  "id": zod.coerce.number().min(1)
+})
+
+export const DeleteFitnessVisitResponse = zod.object({
+  "goal": zod.number(),
+  "weekStart": zod.string(),
+  "weekEnd": zod.string(),
+  "today": zod.string(),
+  "count": zod.number(),
+  "visits": zod.array(zod.object({
+  "id": zod.number(),
+  "date": zod.string()
+})),
+  "reminders": zod.object({
+  "enabled": zod.boolean(),
+  "days": zod.array(zod.number()),
+  "time": zod.string(),
+  "timezone": zod.string(),
+  "scheduledUntil": zod.string().nullable(),
+  "nextReminder": zod.string().nullable(),
+  "error": zod.string().nullable(),
+  "scheduledCount": zod.number()
+})
+})
+
+
+export const GetFitnessPushConfigResponse = zod.object({
+  "appId": zod.string(),
+  "externalId": zod.string()
+})
+
+
+/**
+ * @summary Set two weekly reminder days and schedule four weeks ahead
+ */
+export const saveFitnessRemindersBodyDaysItemMax = 7;
+
+export const saveFitnessRemindersBodyDaysMin = 2;
+export const saveFitnessRemindersBodyDaysMax = 2;
+
+export const saveFitnessRemindersBodyTimeRegExp = new RegExp('^([01]\\d|2[0-3]):[0-5]\\d$');
+export const saveFitnessRemindersBodyTimezoneMax = 80;
+
+
+
+export const SaveFitnessRemindersBody = zod.object({
+  "enabled": zod.boolean(),
+  "days": zod.array(zod.number().min(1).max(saveFitnessRemindersBodyDaysItemMax)).min(saveFitnessRemindersBodyDaysMin).max(saveFitnessRemindersBodyDaysMax),
+  "time": zod.string().regex(saveFitnessRemindersBodyTimeRegExp),
+  "timezone": zod.string().min(1).max(saveFitnessRemindersBodyTimezoneMax),
+  "subscriptionId": zod.string().nullish()
+})
+
+export const SaveFitnessRemindersResponse = zod.object({
+  "goal": zod.number(),
+  "weekStart": zod.string(),
+  "weekEnd": zod.string(),
+  "today": zod.string(),
+  "count": zod.number(),
+  "visits": zod.array(zod.object({
+  "id": zod.number(),
+  "date": zod.string()
+})),
+  "reminders": zod.object({
+  "enabled": zod.boolean(),
+  "days": zod.array(zod.number()),
+  "time": zod.string(),
+  "timezone": zod.string(),
+  "scheduledUntil": zod.string().nullable(),
+  "nextReminder": zod.string().nullable(),
+  "error": zod.string().nullable(),
+  "scheduledCount": zod.number()
+})
+})
+
+
+/**
+ * @summary Extend reminders when the app is opened
+ */
+export const RefreshFitnessRemindersResponse = zod.object({
+  "goal": zod.number(),
+  "weekStart": zod.string(),
+  "weekEnd": zod.string(),
+  "today": zod.string(),
+  "count": zod.number(),
+  "visits": zod.array(zod.object({
+  "id": zod.number(),
+  "date": zod.string()
+})),
+  "reminders": zod.object({
+  "enabled": zod.boolean(),
+  "days": zod.array(zod.number()),
+  "time": zod.string(),
+  "timezone": zod.string(),
+  "scheduledUntil": zod.string().nullable(),
+  "nextReminder": zod.string().nullable(),
+  "error": zod.string().nullable(),
+  "scheduledCount": zod.number()
+})
+})
+
+
+/**
+ * @summary Send one test notification to this device only
+ */
+export const TestFitnessReminderResponse = zod.object({
+  "message": zod.string()
+})
+
+
+/**
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
