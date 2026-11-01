@@ -24,13 +24,6 @@ export function weekStart(day: string): string {
   return shiftDay(day, 1 - weekday);
 }
 
-// Five rotating week slots keep the provider tag count bounded. Including the
-// actual week as the tag value prevents an old campaign matching a later week.
-export function weekTag(day: string): string {
-  const week = Math.floor(new Date(`${weekStart(day)}T12:00:00Z`).getTime() / (7 * 86400_000));
-  return `fitness_due_${week % 5}`;
-}
-
 export function reminderSlots(
   profile: { days: number[]; time: string; timezone: string },
   now = new Date(),

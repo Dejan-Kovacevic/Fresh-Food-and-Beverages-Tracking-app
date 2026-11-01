@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { localDate, reminderSlots, shiftDay, validDay, weekStart, weekTag } from "./fitness-time";
+import { localDate, reminderSlots, shiftDay, validDay, weekStart } from "./fitness-time";
 
 test("weeks begin Monday and end Sunday, including year boundaries", () => {
   assert.equal(weekStart("2026-11-01"), "2026-10-26");
@@ -37,10 +37,4 @@ test("past times are not scheduled and summer time uses the right UTC offset", (
 test("a nonexistent spring DST clock time is skipped", () => {
   const slots = reminderSlots({ days: [3, 7], time: "02:30", timezone: "Europe/Zurich" }, new Date("2027-03-25T12:00:00Z"));
   assert.ok(!slots.some(s => localDate(s, "Europe/Zurich") === "2027-03-28"));
-});
-
-test("five rotating tag keys cover five different weeks without accumulation", () => {
-  const weeks = Array.from({ length: 5 }, (_, index) => shiftDay("2026-11-02", index * 7));
-  assert.equal(new Set(weeks.map(weekTag)).size, 5);
-  assert.equal(weekTag("2026-11-02"), weekTag(shiftDay("2026-11-02", 35)));
 });

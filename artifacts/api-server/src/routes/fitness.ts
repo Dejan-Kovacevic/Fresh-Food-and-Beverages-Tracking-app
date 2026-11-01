@@ -79,7 +79,10 @@ async function syncSafely(profile: FitnessProfile, req: Request) {
     await scheduleFitnessReminders(profile);
     return true;
   } catch (error) {
-    req.log.warn({ profileId: profile.id, errorType: error instanceof Error ? error.name : "unknown" }, "Fitness reminder sync failed");
+    req.log.warn({
+      errorType: error instanceof Error ? error.name : "unknown",
+      ...(error instanceof ReminderError ? { provider: error.provider } : {}),
+    }, "Fitness reminder sync failed");
     await db.update(fitnessProfilesTable).set({
       error: error instanceof ReminderError ? error.message : "Erinnerungen konnten nicht geplant werden. Bitte erneut versuchen.",
     }).where(eq(fitnessProfilesTable.id, profile.id));

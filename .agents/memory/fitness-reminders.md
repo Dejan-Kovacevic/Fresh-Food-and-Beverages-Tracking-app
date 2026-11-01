@@ -14,3 +14,9 @@ Closed-app reminders use OneSignal campaigns scheduled four weeks ahead and exte
 **Why:** The existing Autoscale deployment can sleep when the app is unused; OneSignal scheduling is limited to 30 days ahead. A running browser or server timer cannot guarantee delivery.
 
 **How to apply:** Always disclose the finite scheduling horizon and confirmed end date; never claim reminders continue indefinitely without opening the app. Any future always-on scheduler is a separate infrastructure decision.
+
+Keep provider-side reminder state within two nonempty OneSignal tags, rather than one tag for every future week.
+
+**Why:** The connected plan rejected the original multi-tag state with HTTP 409 `entitlements-tag-limit`, while a two-tag update was accepted. The limitation is independent of push permission: immediate test notifications can still work.
+
+**How to apply:** Do not add audience tags casually. Preserve plan isolation, obsolete-plan exclusion, disabling, and weekly-goal suppression within the tag budget; empty tag values delete tags and are not persistent sentinels.

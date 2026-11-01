@@ -1,7 +1,8 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { and, eq, gte } from "drizzle-orm";
 import { db, fitnessMessagesTable, fitnessProfilesTable, fitnessVisitsTable, type FitnessProfile } from "@workspace/db";
-import { GOAL, HORIZON_DAYS, localDate, reminderSlots, shiftDay, weekStart, weekTag } from "./fitness-time";
+import { GOAL, localDate, reminderSlots, shiftDay, weekStart } from "./fitness-time";
+import { fitnessAudienceFilters, fitnessAudienceTags, fitnessTagsApplied, fitnessTagUpdate } from "./fitness-audience";
 
 // Public application identifier, supplied by the owner; not an API credential.
 export const FITNESS_APP_ID = "d17da91e-5428-49a4-887d-8bff2034887d";
@@ -9,7 +10,12 @@ const FITNESS_WEB_URL = "https://fresh-food-and-beverages-tracking-app.replit.ap
 export const externalId = (profileId: string) => `nutri-fitness-${profileId}`;
 const connectors = new ReplitConnectors();
 
-export class ReminderError extends Error {}
+export class ReminderError extends Error {
+  constructor(message: string, readonly provider?: { status: number; code?: string; operation: string }) {
+    super(message);
+    this.name = "ReminderError";
+  }
+}
 
 async function oneSignal(path: string, method = "GET", body?: unknown) {
   const response = await connectors.proxy("onesignal", path, {
@@ -27,11 +33,21 @@ async function oneSignal(path: string, method = "GET", body?: unknown) {
   };
   const hasErrors = Array.isArray(data.errors) ? data.errors.length > 0 : Boolean(data.errors);
   if (!response.ok || hasErrors) {
-    // Do not expose provider payloads or subscription identifiers in logs/UI.
+    // Log only a bounded machine error code/status, never a provider payload,
+    // user URL, device token, subscription identifier, or authentication data.
+    const firstError = Array.isArray(data.errors) ? data.errors[0] : undefined;
+    const rawCode = firstError && typeof firstError === "object" && "code" in firstError
+      ? firstError.code : undefined;
+    const code = typeof rawCode === "string" && /^[a-z0-9_-]{1,80}$/i.test(rawCode) ? rawCode : undefined;
     throw new ReminderError(
-      response.status === 401 || response.status === 403
+      code === "entitlements-tag-limit"
+        ? "OneSignal meldet ein Limit für Geräte-Merkmale. Bitte prüfe die OneSignal-Einstellungen."
+        : response.status === 401 || response.status === 403
         ? "OneSignal-Verbindung prüfen: App ID, Berechtigung oder Verbindung stimmen nicht."
+        : response.status === 429
+        ? "OneSignal erhält gerade zu viele Anfragen. Bitte warte kurz und versuche es erneut."
         : "OneSignal konnte die Erinnerungen nicht übernehmen. Bitte erneut versuchen.",
+      { status: response.status, code, operation: path === "/notifications" ? "create-message" : `${method.toLowerCase()}-user` },
     );
   }
   return data;
@@ -55,17 +71,9 @@ export async function syncFitnessTags(profile: FitnessProfile) {
   const currentWeek = weekStart(today);
   const visits = await db.select({ date: fitnessVisitsTable.date }).from(fitnessVisitsTable)
     .where(and(eq(fitnessVisitsTable.profileId, profile.id), gte(fitnessVisitsTable.date, currentWeek)));
-  const tags: Record<string, string> = {
-    fitness_owner: profile.id,
-    fitness_revision: String(profile.revision),
-    fitness_enabled: profile.enabled ? "1" : "0",
-  };
-  for (let offset = 0; offset <= HORIZON_DAYS; offset += 7) {
-    const start = shiftDay(currentWeek, offset);
-    const end = shiftDay(start, 7);
-    const count = visits.filter(v => v.date >= start && v.date < end).length;
-    tags[weekTag(start)] = count < GOAL ? start : "";
-  }
+  const end = shiftDay(currentWeek, 7);
+  const count = visits.filter(v => v.date < end).length;
+  const tags = fitnessTagUpdate(fitnessAudienceTags(profile, currentWeek, count));
   await oneSignal(userPath(profile), "PATCH", { properties: { tags } });
   // OneSignal user updates are asynchronous. Do not create campaigns against
   // tags which have not yet been applied.
@@ -73,7 +81,7 @@ export async function syncFitnessTags(profile: FitnessProfile) {
     // The OneSignal user-read API is limited to roughly one request per second.
     await new Promise(resolve => setTimeout(resolve, 1100));
     const user = await oneSignal(userPath(profile));
-    if (Object.entries(tags).every(([key, value]) => user.properties?.tags?.[key] === value)) return;
+    if (fitnessTagsApplied(tags, user.properties?.tags)) return;
   }
   throw new ReminderError("Die Push-Einstellungen werden noch übernommen. Bitte gleich erneut versuchen.");
 }
@@ -111,12 +119,7 @@ export async function scheduleFitnessReminders(profile: FitnessProfile) {
       target_channel: "push",
       // Scheduled filters are evaluated by OneSignal at delivery. Changing the
       // revision, disabling, or reaching the goal excludes obsolete campaigns.
-      filters: [
-        { field: "tag", key: "fitness_owner", relation: "=", value: profile.id },
-        { field: "tag", key: "fitness_revision", relation: "=", value: String(profile.revision) },
-        { field: "tag", key: "fitness_enabled", relation: "=", value: "1" },
-        { field: "tag", key: weekTag(slotWeek), relation: "=", value: slotWeek },
-      ],
+      filters: fitnessAudienceFilters(profile, slotWeek),
       headings: { en: "Dein Fitnessziel", de: "Dein Fitnessziel" },
       contents: {
         en: "Zeit fürs Fitness – dein Ziel: mindestens 2 Besuche pro Woche.",
