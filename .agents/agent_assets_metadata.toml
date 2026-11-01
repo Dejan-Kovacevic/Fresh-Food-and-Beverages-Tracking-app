@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "D06No3zrpYw-IN5-Bn7Nv"
+uri = "file://attached_assets/nutriai-onesignal-icon-256.png"
+type = "image"
+title = "NutriAI – Benachrichtigungssymbol"
+description = "PNG mit 256 × 256 Pixeln für OneSignal. Passend zur App: mintgrüne Hantel auf dunkelgrünem Hintergrund."
+logical_id = "4b59d4de-02b1-4343-b635-a75335f3c43f"
+content_hash = "sha256:12c095e2b4373fdf667b625e9f05334c3eb26df2fae250189adcde5cbe7c4c24"
+size = 909
+mtime_ms = 1793569222484
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:ec751ef5-6f8b-40f3-97c0-df6f48908c6c/4b59d4de-02b1-4343-b635-a75335f3c43f/54b8d0ac-ff8b-435e-9a95-2966954c6349"
+storage_version_token = "1793569283997598"
+content_type = "image/png"
